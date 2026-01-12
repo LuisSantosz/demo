@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casamento de Ana & Pedro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f7f4;
+            overflow-x: hidden;
+        }
+        
+        .serif-font {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        /* Header e Nomes */
+        .wedding-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .wedding-title {
+            font-size: 4.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+        
+        .wedding-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 8px;
+        }
+        
+        .wedding-date {
+            font-size: 1.8rem;
+            margin-top: 30px;
+            letter-spacing: 2px;
+        }
+        
+        /* Carrossel de Fotos */
+        .photo-carousel {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            flex-shrink: 0;
+            height: 500px;
+            object-fit: cover;
+        }
+        
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .carousel-btn:hover {
+            background: white;
+        }
+        
+        .prev-btn {
+            left: 20px;
+        }
+        
+        .next-btn {
+            right: 20px;
+        }
+        
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .dot.active {
+            background: #b08d74;
+        }
+        
+        /* História do Casal */
+        .couple-story {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 0 30px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            color: #5a4a42;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: #b08d74;
+        }
+        
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        /* Detalhes do Evento */
+        .event-details {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+        
+        .detail-card {
+            flex: 1;
+            min-width: 300px;
+            margin: 15px;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .detail-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .detail-icon {
+            font-size: 2.5rem;
+            color: #b08d74;
+            margin-bottom: 20px;
+        }
+        
+        .detail-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #5a4a42;
+        }
+        
+        .detail-content {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        /* Mapa */
+        .location-map {
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        /* Dress Code */
+        .dress-code {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 0 30px;
+            text-align: center;
+        }
+        
+        .dress-examples {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .dress-example {
+            margin: 15px;
+            text-align: center;
+        }
+        
+        .dress-icon {
+            font-size: 2.5rem;
+            color: #b08d74;
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        .wedding-footer {
+            background: #5a4a42;
+            color: #f1e9e2;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+        
+        .footer-text {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .heart {
+            color: #e6b0aa;
+            margin: 0 5px;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .wedding-title {
+                font-size: 3rem;
+            }
+            
+            .wedding-subtitle {
+                font-size: 1.2rem;
+                letter-spacing: 5px;
+            }
+            
+            .wedding-date {
+                font-size: 1.4rem;
+            }
+            
+            .carousel-slide img {
+                height: 400px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .detail-card {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .wedding-title {
+                font-size: 2.5rem;
+            }
+            
+            .wedding-subtitle {
+                font-size: 1rem;
+                letter-spacing: 3px;
+            }
+            
+            .carousel-slide img {
+                height: 300px;
+            }
+            
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header com Nomes e Data -->
+    <header class="wedding-header">
+        <h1 class="wedding-title serif-font">Ana & Pedro</h1>
+        <p class="wedding-subtitle">CONVIDAM PARA A CELEBRAÇÃO DO SEU CASAMENTO</p>
+        <p class="wedding-date serif-font">18 de Novembro de 2023</p>
+    </header>
+    
+    <!-- Carrossel de Fotos -->
+    <section class="photo-carousel">
+        <h2 class="section-title serif-font text-center">Nossa História em Imagens</h2>
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Ana e Pedro na praia">
+                <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Ana e Pedro no inverno">
+                <img src="https://images.unsplash.com/photo-1494790108755-2616b786d4d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Ana e Pedro sorrindo">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Ana e Pedro em viagem">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Ana e Pedro no pôr do sol">
+            </div>
+            <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="carousel-dots">
+            <div class="dot active" data-slide="0"></div>
+            <div class="dot" data-slide="1"></div>
+            <div class="dot" data-slide="2"></div>
+            <div class="dot" data-slide="3"></div>
+            <div class="dot" data-slide="4"></div>
+        </div>
+    </section>
+    
+    <!-- História do Casal -->
+    <section class="couple-story">
+        <h2 class="section-title serif-font">Nossa História</h2>
+        <p class="story-text">Tudo começou em uma charmosa livraria no centro da cidade, onde nossos caminhos se cruzaram ao buscar o mesmo exemplar de "Cem Anos de Solidão". Aquele encontro casual rapidamente se transformou em longas conversas sobre livros, viagens e sonhos.</p>
+        <p class="story-text">Nosso primeiro encontro oficial foi em uma pequena cafeteria da cidade, onde ficamos por horas conversando como se nos conhecêssemos há anos. Dali em diante, cada momento juntos foi uma nova página da nossa história sendo escrita.</p>
+        <p class="story-text">Dois anos depois, durante uma viagem à Paris, Pedro surpreendeu Ana com um pedido de casamento em frente à Torre Eiffel ao pôr do sol. Foi um momento mágico que selou nosso compromisso de passar uma vida juntos.</p>
+        <p class="story-text">Agora, com imensa alegria, convidamos vocês para celebrar conosco o início desta nova etapa, onde duas histórias se tornam uma só para sempre.</p>
+    </section>
+    
+    <!-- Detalhes do Evento -->
+    <section class="event-details">
+        <div class="detail-card">
+            <div class="detail-icon">
+                <i class="far fa-calendar-alt"></i>
+            </div>
+            <h3 class="detail-title serif-font">Data e Horário</h3>
+            <p class="detail-content">18 de Novembro de 2023</p>
+            <p class="detail-content">Cerimônia: 16h00</p>
+            <p class="detail-content">Recepção: 18h00</p>
+        </div>
+        
+        <div class="detail-card">
+            <div class="detail-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h3 class="detail-title serif-font">Localização</h3>
+            <p class="detail-content">Chácara dos Eucaliptos</p>
+            <p class="detail-content">Estrada do Sol, 1234 - Jardim das Flores</p>
+            <p class="detail-content">São Paulo - SP</p>
+        </div>
+        
+        <div class="detail-card">
+            <div class="detail-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <h3 class="detail-title serif-font">Confirmação de Presença</h3>
+            <p class="detail-content">Por favor, confirmar presença até</p>
+            <p class="detail-content">01 de Novembro de 2023</p>
+            <p class="detail-content">(11) 98765-4321 / (11) 91234-5678</p>
+        </div>
+    </section>
+    
+    <!-- Mapa -->
+    <section class="location-map">
+        <h2 class="section-title serif-font text-center">Local do Evento</h2>
+        <div class="map-container" id="map"></div>
+    </section>
+    
+    <!-- Dress Code -->
+    <section class="dress-code">
+        <h2 class="section-title serif-font">Estilo de Roupa</h2>
+        <p class="story-text">Para celebrar conosco este dia especial, pedimos que utilizem trajes sociais elegantes em tons claros e pastel.</p>
+        <div class="dress-examples">
+            <div class="dress-example">
+                <div class="dress-icon">
+                    <i class="fas fa-female"></i>
+                </div>
+                <p>Vestidos longos ou midi<br>Elegantes e sofisticados</p>
+            </div>
+            <div class="dress-example">
+                <div class="dress-icon">
+                    <i class="fas fa-male"></i>
+                </div>
+                <p>Traje social completo<br>Terno ou smoking</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="wedding-footer">
+        <p class="footer-text serif-font">Com amor, Ana & Pedro</p>
+        <p class="footer-text">Contamos com sua presença para tornar nosso dia ainda mais especial!</p>
+        <p class="footer-text">Nos vemos em 18 de Novembro <i class="fas fa-heart heart"></i></p>
+    </footer>
+    
+    <script>
+        // Carrossel de Fotos
+        const carouselSlide = document.querySelector('.carousel-slide');
+        const carouselImages = document.querySelectorAll('.carousel-slide img');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const dots = document.querySelectorAll('.dot');
+        
+        let counter = 0;
+        const size = carouselImages[0].clientWidth;
+        
+        // Configuração inicial do carrossel
+        carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+        
+        // Botões de navegação
+        nextBtn.addEventListener('click', () => {
+            if (counter >= carouselImages.length - 1) return;
+            carouselSlide.style.transition = "transform 0.5s ease-in-out";
+            counter++;
+            carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+            updateDots();
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            if (counter <= 0) return;
+            carouselSlide.style.transition = "transform 0.5s ease-in-out";
+            counter--;
+            carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+            updateDots();
+        });
+        
+        // Transição automática a cada 5 segundos
+        setInterval(() => {
+            if (counter >= carouselImages.length - 1) {
+                counter = -1;
+            }
+            carouselSlide.style.transition = "transform 0.5s ease-in-out";
+            counter++;
+            carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+            updateDots();
+        }, 5000);
+        
+        // Navegação por dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                carouselSlide.style.transition = "transform 0.5s ease-in-out";
+                counter = index;
+                carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+                updateDots();
+            });
+        });
+        
+        // Atualizar dots ativos
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                if (index === counter) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        // Mapa do Google Maps (simulado com imagem por questões de simplificação)
+        // Em uma implementação real, você usaria a API do Google Maps
+        document.getElementById('map').innerHTML = `
+            <div style="width:100%;height:100%;background:#eee;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+                <i class="fas fa-map-marked-alt" style="font-size:3rem;color:#b08d74;margin-bottom:20px;"></i>
+                <h3 style="color:#5a4a42;margin-bottom:10px;">Chácara dos Eucaliptos</h3>
+                <p style="color:#666;text-align:center;padding:0 20px;">Estrada do Sol, 1234 - Jardim das Flores<br>São Paulo - SP</p>
+                <a href="https://maps.google.com/?q=Chácara+dos+Eucaliptos,São+Paulo,SP" target="_blank" style="display:inline-block;margin-top:20px;padding:10px 20px;background:#b08d74;color:white;text-decoration:none;border-radius:4px;">Abrir no Google Maps</a>
+            </div>
+        `;
+        
+        // Ajustar tamanho do carrossel ao redimensionar a janela
+        window.addEventListener('resize', () => {
+            carouselSlide.style.transition = "none";
+            carouselSlide.style.transform = 'translateX(' + (-carouselImages[0].clientWidth * counter) + 'px)';
+        });
+    </script>
+</body>
+</html>

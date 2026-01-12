@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Casamento de Ana & Pedro</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Fontes premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg0:#07060A;
+      --bg1:#0B0A10;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.04);
+      --line:rgba(255,255,255,.10);
+      --muted:rgba(255,255,255,.70);
+      --text:rgba(255,255,255,.92);
+      --gold:#D6B56E;
+      --gold2:#F6E7C2;
+      --accent:#9D7B4A;
+      --shadow: 0 24px 80px rgba(0,0,0,.55);
+      --radius: 20px;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 10% 10%, rgba(214,181,110,.10), transparent 55%),
+                  radial-gradient(900px 700px at 90% 30%, rgba(157,123,74,.10), transparent 55%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* Texturas / brilho sutil */
+    .grain{
+      position:fixed; inset:0;
+      background-image:url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+      opacity:.06;
+      pointer-events:none;
+      z-index:-1;
+      mix-blend-mode: overlay;
+    }
+    .glow-orbs{
+      position:fixed; inset:-20%;
+      pointer-events:none; z-index:-2;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(214,181,110,.10), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(246,231,194,.08), transparent 45%),
+        radial-gradient(circle at 90% 10%, rgba(157,123,74,.08), transparent 40%);
+      filter: blur(8px);
+      animation: floatOrbs 16s ease-in-out infinite;
+    }
+    @keyframes floatOrbs{
+      0%,100%{transform: translate3d(0,0,0)}
+      50%{transform: translate3d(2%, -1%, 0)}
+    }
+
+    /* Topbar premium */
+    .topbar{
+      position:fixed;
+      top:14px; left:50%;
+      transform:translateX(-50%);
+      width:min(1120px, calc(100% - 24px));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 12px;
+      border:1px solid rgba(214,181,110,.18);
+      background: rgba(10,10,14,.55);
+      backdrop-filter: blur(16px);
+      border-radius: 999px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      z-index:999;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      white-space:nowrap;
+      font-family:"Playfair Display",serif;
+      letter-spacing:.08em;
+      color: rgba(255,255,255,.92);
+      font-size:.98rem;
+    }
+    .brand .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(45deg, var(--gold), var(--gold2));
+      box-shadow: 0 0 0 6px rgba(214,181,110,.12);
+    }
+    .nav{
+      display:flex; gap:6px; flex-wrap:wrap;
+      justify-content:center;
+    }
+    .nav a{
+      text-decoration:none;
+      color: rgba(255,255,255,.78);
+      font-size:.92rem;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition:.25s ease;
+    }
+    .nav a:hover{
+      border-color: rgba(214,181,110,.25);
+      background: rgba(214,181,110,.08);
+      color: rgba(255,255,255,.92);
+      transform: translateY(-1px);
+    }
+    .actions{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      appearance:none; border:none; cursor:pointer;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:.92rem;
+      display:inline-flex; gap:10px; align-items:center; justify-content:center;
+      transition:.25s ease;
+      white-space:nowrap;
+    }
+    .btn-gold{
+      color:#1a140b;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      box-shadow: 0 18px 50px rgba(214,181,110,.18);
+    }
+    .btn-gold:hover{transform: translateY(-2px); filter: brightness(.98);}
+    .btn-ghost{
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.88);
+    }
+    .btn-ghost:hover{background: rgba(255,255,255,.10); transform: translateY(-1px);}
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:120px 18px 70px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.60), rgba(0,0,0,.55)),
+        url("https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=2400&q=80") center/cover no-repeat;
+      filter: saturate(.95) contrast(1.05);
+      transform: scale(1.03);
+      z-index:-3;
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(800px 500px at 50% 40%, rgba(214,181,110,.16), transparent 60%);
+      z-index:-2;
+    }
+
+    .hero-card{
+      width:min(980px, 100%);
+      border:1px solid rgba(214,181,110,.20);
+      background: linear-gradient(145deg, rgba(10,10,14,.62), rgba(10,10,14,.36));
+      backdrop-filter: blur(18px);
+      border-radius: calc(var(--radius) + 10px);
+      box-shadow: var(--shadow);
+      padding: 60px 28px 42px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(900px 400px at 10% 10%, rgba(246,231,194,.12), transparent 55%),
+                  radial-gradient(700px 400px at 90% 70%, rgba(214,181,110,.10), transparent 55%);
+      z-index:-1;
+    }
+    .orn{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      margin-bottom:18px;
+      opacity:.95;
+    }
+    .orn .line{
+      width:120px; height:1px;
+      background: linear-gradient(90deg, transparent, rgba(214,181,110,.85), transparent);
+    }
+    .orn .mark{
+      font-size:1.1rem;
+      color: var(--gold);
+      text-shadow: 0 0 18px rgba(214,181,110,.25);
+    }
+
+    .names{
+      font-family:"Cormorant Garamond",serif;
+      font-size: clamp(2.8rem, 5vw, 5.2rem);
+      font-weight: 300;
+      letter-spacing:.06em;
+      text-align:center;
+      line-height:1.06;
+      background: linear-gradient(135deg, #fff, var(--gold2), var(--gold));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color: transparent;
+      text-shadow: 0 0 70px rgba(214,181,110,.18);
+    }
+    .subtitle{
+      margin-top:14px;
+      text-align:center;
+      letter-spacing:.35em;
+      font-size: .98rem;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.80);
+    }
+    .date{
+      margin-top: 22px;
+      text-align:center;
+      font-family:"Playfair Display",serif;
+      letter-spacing:.12em;
+      font-size: 1.12rem;
+      color: rgba(255,255,255,.88);
+    }
+
+    .hero-pills{
+      margin-top: 28px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .pill{
+      border:1px solid rgba(214,181,110,.18);
+      background: rgba(255,255,255,.04);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: .95rem;
+      color: rgba(255,255,255,.86);
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .pill i{ color: var(--gold); }
+
+    .scroll{
+      margin-top: 34px;
+      display:flex;
+      justify-content:center;
+      opacity:.95;
+    }
+    .scroll button{
+      width:54px;height:54px;border-radius:999px;
+      border:1px solid rgba(214,181,110,.22);
+      background: rgba(10,10,14,.35);
+      color: var(--gold);
+      cursor:pointer;
+      transition:.25s ease;
+    }
+    .scroll button:hover{transform: translateY(-2px); background: rgba(214,181,110,.10);}
+
+    /* SEÇÕES */
+    section{
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 86px 18px;
+    }
+
+    .section-head{
+      text-align:center;
+      margin-bottom: 34px;
+    }
+    .section-title{
+      font-family:"Cormorant Garamond",serif;
+      font-weight: 400;
+      font-size: clamp(2.1rem, 3.2vw, 3.2rem);
+      letter-spacing:.08em;
+      color: rgba(255,255,255,.92);
+      position:relative;
+      display:inline-block;
+      padding-bottom: 14px;
+    }
+    .section-title::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      transform: translateX(-50%);
+      bottom:0;
+      width: 130px;
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(214,181,110,.90), transparent);
+    }
+    .section-sub{
+      margin-top: 14px;
+      color: rgba(255,255,255,.70);
+      font-size: 1.06rem;
+      max-width: 820px;
+      margin-left:auto;
+      margin-right:auto;
+      line-height: 1.9;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: var(--radius);
+      box-shadow: 0 16px 50px rgba(0,0,0,.35);
+      padding: 26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(700px 240px at 10% 10%, rgba(214,181,110,.10), transparent 55%);
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .label{
+      color: rgba(214,181,110,.95);
+      letter-spacing:.24em;
+      font-size:.78rem;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .big{
+      margin-top: 10px;
+      font-family:"Playfair Display",serif;
+      font-size: 1.5rem;
+      color: rgba(255,255,255,.92);
+    }
+    .text{
+      margin-top: 12px;
+      color: rgba(255,255,255,.70);
+      font-size: 1.05rem;
+      line-height: 1.95;
+      text-align: justify;
+    }
+
+    /* TIMELINE */
+    .timeline{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .titem{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 18px 16px;
+      transition: .25s ease;
+    }
+    .titem:hover{
+      transform: translateY(-4px);
+      border-color: rgba(214,181,110,.22);
+      background: rgba(214,181,110,.06);
+    }
+    .ticon{ color: var(--gold); font-size: 1.35rem; }
+    .ttime{
+      margin-top: 10px;
+      font-family:"Playfair Display",serif;
+      letter-spacing:.08em;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,.92);
+    }
+    .ttitle{
+      margin-top: 8px;
+      letter-spacing:.18em;
+      text-transform: uppercase;
+      font-size: .85rem;
+      color: rgba(255,255,255,.78);
+    }
+    .tdesc{
+      margin-top: 10px;
+      color: rgba(255,255,255,.65);
+      font-size: .95rem;
+      line-height: 1.6;
+    }
+
+    /* CARROSSEL PREMIUM */
+    .carousel{
+      position:relative;
+      overflow:hidden;
+      border-radius: calc(var(--radius) + 8px);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+    }
+    .track{
+      display:flex;
+      transition: transform .55s cubic-bezier(.2,.85,.2,1);
+      will-change: transform;
+    }
+    .slide{
+      min-width: 100%;
+      height: 560px;
+      position:relative;
+    }
+    .slide img{
+      width:100%; height:100%;
+      object-fit: cover;
+      filter: saturate(.95) contrast(1.05) brightness(.90);
+      transform: scale(1.02);
+    }
+    .slide::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.55)),
+        radial-gradient(800px 380px at 50% 30%, rgba(214,181,110,.14), transparent 60%);
+      pointer-events:none;
+    }
+    .cap{
+      position:absolute;
+      left:18px; bottom:18px;
+      right:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(10,10,14,.50);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+      padding: 14px 14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      color: rgba(255,255,255,.88);
+    }
+    .cap b{
+      font-family:"Playfair Display",serif;
+      letter-spacing:.08em;
+      font-weight:600;
+    }
+    .cap span{
+      color: rgba(255,255,255,.70);
+      font-size:.95rem;
+    }
+
+    .cbtn{
+      position:absolute;
+      top:50%;
+      transform: translateY(-50%);
+      width:52px; height:52px;
+      border-radius:999px;
+      border:1px solid rgba(214,181,110,.25);
+      background: rgba(10,10,14,.55);
+      color: var(--gold);
+      cursor:pointer;
+      transition:.25s ease;
+      display:grid;
+      place-items:center;
+    }
+    .cbtn:hover{ background: rgba(214,181,110,.12); transform: translateY(-50%) scale(1.02); }
+    .cprev{ left:14px; }
+    .cnext{ right:14px; }
+
+    .dots{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      margin-top: 14px;
+    }
+    .dot{
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.25);
+      border:1px solid rgba(255,255,255,.20);
+      cursor:pointer;
+      transition:.25s ease;
+    }
+    .dot.active{
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      border-color: rgba(214,181,110,.22);
+      box-shadow: 0 0 0 6px rgba(214,181,110,.10);
+    }
+
+    /* MAPA */
+    .map{
+      height: 420px;
+      border-radius: calc(var(--radius) + 8px);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      position:relative;
+      background: rgba(255,255,255,.04);
+    }
+    .map iframe{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:0;
+      opacity:.65;
+      filter: saturate(.95) contrast(1.05) brightness(.85);
+    }
+    .map .overlay{
+      position:absolute; inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      background: radial-gradient(700px 360px at 50% 30%, rgba(214,181,110,.14), transparent 62%),
+                  linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.55));
+    }
+    .map .overlay .box{
+      width:min(760px, 100%);
+      border:1px solid rgba(214,181,110,.22);
+      background: rgba(10,10,14,.55);
+      backdrop-filter: blur(18px);
+      border-radius: var(--radius);
+      padding: 22px;
+      text-align:center;
+      box-shadow: 0 18px 70px rgba(0,0,0,.55);
+    }
+    .map .overlay .box h3{
+      font-family:"Playfair Display",serif;
+      letter-spacing:.12em;
+      font-weight:600;
+      color: rgba(255,255,255,.92);
+      font-size: 1.35rem;
+    }
+    .map .overlay .box p{
+      margin-top: 10px;
+      color: rgba(255,255,255,.72);
+      line-height:1.8;
+      font-size: 1.02rem;
+    }
+    .map-actions{
+      margin-top: 14px;
+      display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+    }
+
+    /* DRESS CODE */
+    .dress-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .dress{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align:center;
+      transition:.25s ease;
+    }
+    .dress:hover{transform: translateY(-4px); border-color: rgba(214,181,110,.20); background: rgba(214,181,110,.06);}
+    .dress i{ color: var(--gold); font-size: 2rem; }
+    .dress h4{
+      margin-top: 10px;
+      font-family:"Playfair Display",serif;
+      letter-spacing:.14em;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,.92);
+    }
+    .dress p{
+      margin-top: 10px;
+      color: rgba(255,255,255,.70);
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+    .palette{
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .swatch{
+      width:42px; height:42px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 12px 40px rgba(0,0,0,.40);
+      position:relative;
+      overflow:hidden;
+    }
+    .swatch::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.28), transparent 55%);
+      opacity:.75;
+    }
+
+    /* RSVP (modal + lista) */
+    .rsvp-actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:center;
+      margin-top: 14px;
+    }
+    .stats{
+      margin-top: 12px;
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .rsvp-list{
+      margin-top: 14px;
+      display:grid;
+      gap:10px;
+      max-height: 240px;
+      overflow:auto;
+      padding-right: 4px;
+    }
+    .rsvp-item{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 12px 12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .tag{
+      letter-spacing:.16em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: .78rem;
+      align-self:flex-start;
+    }
+    .tag.yes{ color: #58e39d; }
+    .tag.no{ color: #ff9b7b; }
+
+    .modal-backdrop{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,0,0,.75);
+      z-index:2000;
+      padding: 18px;
+    }
+    .modal{
+      width:min(640px, 100%);
+      border-radius: calc(var(--radius) + 6px);
+      border:1px solid rgba(214,181,110,.22);
+      background: rgba(10,10,14,.75);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 30px 100px rgba(0,0,0,.70);
+      overflow:hidden;
+    }
+    .mhead{
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .mhead h3{
+      font-family:"Playfair Display",serif;
+      letter-spacing:.10em;
+      font-weight:600;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,.92);
+    }
+    .mx{
+      width:44px;height:44px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.90);
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .mx:hover{background: rgba(255,255,255,.10); transform: translateY(-1px);}
+    .mbody{ padding: 16px 18px 18px; }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    label{
+      display:block;
+      margin-top: 12px;
+      color: rgba(255,255,255,.80);
+      font-weight:600;
+      font-size:.92rem;
+    }
+    input, select, textarea{
+      width:100%;
+      margin-top: 8px;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.92);
+      outline:none;
+      font-size: 1rem;
+      font-family: "Montserrat", sans-serif;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(214,181,110,.55);
+      box-shadow: 0 0 0 4px rgba(214,181,110,.14);
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+    .mact{
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      margin-top: 14px;
+      flex-wrap:wrap;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      transform: translateX(-50%);
+      bottom: 18px;
+      background: rgba(10,10,14,.85);
+      border:1px solid rgba(214,181,110,.18);
+      color: rgba(255,255,255,.92);
+      padding: 10px 14px;
+      border-radius: 999px;
+      display:none;
+      z-index:3000;
+      box-shadow: 0 20px 70px rgba(0,0,0,.65);
+      font-weight:600;
+    }
+
+    /* Footer */
+    footer{
+      padding: 60px 18px 80px;
+      text-align:center;
+      color: rgba(255,255,255,.70);
+      border-top:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+    }
+    footer b{color: rgba(255,255,255,.92);}
+
+    /* Responsivo */
+    @media (max-width: 980px){
+      .timeline{ grid-template-columns: repeat(2, minmax(180px, 1fr)); }
+      .grid{ grid-template-columns: 1fr; }
+      .slide{ height: 520px; }
+    }
+    @media (max-width: 760px){
+      .nav{ display:none; }
+      .hero-card{ padding: 54px 18px 38px; }
+      .slide{ height: 420px; }
+      .dress-grid{ grid-template-columns: 1fr; }
+      .row{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px){
+      .slide{ height: 330px; }
+      .topbar{ gap:10px; }
+      .brand{ font-size:.92rem; }
+      .btn{ padding: 10px 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow-orbs"></div>
+  <div class="grain"></div>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span> Ana & Pedro</div>
+    <nav class="nav">
+      <a href="#historia">História</a>
+      <a href="#momentos">Momentos</a>
+      <a href="#detalhes">Detalhes</a>
+      <a href="#local">Local</a>
+      <a href="#dress">Dress Code</a>
+      <a href="#rsvp">RSVP</a>
+    </nav>
+    <div class="actions">
+      <a class="btn btn-ghost" href="#local"><i class="fa-solid fa-location-dot"></i>Como chegar</a>
+      <button class="btn btn-gold" id="openRSVP"><i class="fa-solid fa-envelope-open-text"></i>Confirmar</button>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero" id="topo">
+    <div class="hero-card">
+      <div class="orn">
+        <span class="line"></span><span class="mark">✦</span><span class="line"></span>
+      </div>
+
+      <div class="names">Ana &amp; Pedro</div>
+      <div class="subtitle">celebram o amor e convidam você</div>
+      <div class="date">18 · Novembro · 2026</div>
+
+      <div class="hero-pills">
+        <div class="pill"><i class="fa-solid fa-calendar-days"></i> Cerimônia</div>
+        <div class="pill"><i class="fa-solid fa-clock"></i> 16:00</div>
+        <div class="pill"><i class="fa-solid fa-champagne-glasses"></i> Recepção</div>
+        <div class="pill"><i class="fa-solid fa-location-dot"></i> Chácara dos Eucaliptos</div>
+      </div>
+
+      <div class="scroll">
+        <button id="scrollDown" aria-label="Rolar"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- História + Countdown -->
+  <section id="historia">
+    <div class="section-head">
+      <h2 class="section-title">Nossa História</h2>
+      <p class="section-sub">
+        Um encontro que parecia comum, mas que virou destino. Uma história construída em detalhes —
+        e agora celebrada em um dia inesquecível.
+      </p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="label">O início</div>
+        <div class="big">Entre páginas, café e destino</div>
+        <p class="text">
+          Tudo começou em uma livraria, quando dois olhares se encontraram no mesmo livro.
+          O que era para ser apenas um instante virou conversa, riso, e a sensação de que o tempo
+          ficou mais leve. Vieram encontros simples, viagens marcantes e a certeza de que
+          o amor é escolher — todos os dias — caminhar lado a lado.
+        </p>
+
+        <div class="label" style="margin-top:18px;">Linha do tempo</div>
+        <div class="timeline">
+          <div class="titem">
+            <div class="ticon"><i class="fa-solid fa-book-open"></i></div>
+            <div class="ttime">2019</div>
+            <div class="ttitle">O encontro</div>
+            <div class="tdesc">A livraria, o mesmo livro e a primeira conversa.</div>
+          </div>
+          <div class="titem">
+            <div class="ticon"><i class="fa-solid fa-mug-saucer"></i></div>
+            <div class="ttime">2020</div>
+            <div class="ttitle">Primeiro date</div>
+            <div class="tdesc">Café, horas de papo e um começo sem pressa.</div>
+          </div>
+          <div class="titem">
+            <div class="ticon"><i class="fa-solid fa-plane"></i></div>
+            <div class="ttime">2022</div>
+            <div class="ttitle">A viagem</div>
+            <div class="tdesc">O mundo ficou pequeno perto do que sentíamos.</div>
+          </div>
+          <div class="titem">
+            <div class="ticon"><i class="fa-solid fa-ring"></i></div>
+            <div class="ttime">2024</div>
+            <div class="ttitle">O pedido</div>
+            <div class="tdesc">Um “sim” que mudou o resto da história.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label">Contagem regressiva</div>
+        <div class="big">Faltam</div>
+        <p class="text" style="text-align:left">
+          <span style="display:block; font-family:'Playfair Display',serif; font-size:2.2rem; letter-spacing:.06em; color:rgba(255,255,255,.92); margin-top:8px" id="countdown">
+            Carregando...
+          </span>
+          <span style="display:block; margin-top:12px;">
+            Um dia para celebrar, brindar e viver a beleza de estar junto.
+          </span>
+        </p>
+
+        <div class="label" style="margin-top:18px;">Mensagem</div>
+        <p class="text">
+          “Amor é lar — e a nossa casa é onde estivermos juntos.”
+        </p>
+
+        <div class="rsvp-actions">
+          <button class="btn btn-gold" id="openRSVP2"><i class="fa-solid fa-check"></i>Confirmar presença</button>
+          <a class="btn btn-ghost" href="#momentos"><i class="fa-solid fa-images"></i>Ver fotos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carrossel -->
+  <section id="momentos">
+    <div class="section-head">
+      <h2 class="section-title">Momentos</h2>
+      <p class="section-sub">
+        Uma seleção de instantes — para sentir o clima do nosso “sim”.
+        (Troque as fotos pelos arquivos do casal quando quiser.)
+      </p>
+    </div>
+
+    <div class="carousel" aria-label="Carrossel de fotos">
+      <div class="track" id="track">
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=2200&q=80" alt="Ana e Pedro 1">
+          <div class="cap"><b>O primeiro olhar</b><span>onde tudo começou</span></div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=2200&q=80" alt="Ana e Pedro 2">
+          <div class="cap"><b>Leveza</b><span>amor em detalhes</span></div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=2200&q=80" alt="Ana e Pedro 3">
+          <div class="cap"><b>A viagem</b><span>memórias inesquecíveis</span></div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=2200&q=80" alt="Ana e Pedro 4">
+          <div class="cap"><b>O pedido</b><span>um “sim” para sempre</span></div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=2200&q=80" alt="Ana e Pedro 5">
+          <div class="cap"><b>O futuro</b><span>nossa nova história</span></div>
+        </div>
+      </div>
+
+      <button class="cbtn cprev" id="prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="cbtn cnext" id="next" aria-label="Próximo"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <div class="dots" id="dots" aria-label="Indicadores"></div>
+  </section>
+
+  <!-- Detalhes -->
+  <section id="detalhes">
+    <div class="section-head">
+      <h2 class="section-title">Detalhes do Evento</h2>
+      <p class="section-sub">
+        Informações essenciais para que você chegue tranquilo e aproveite cada momento.
+      </p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="label">Agenda da noite</div>
+        <div class="big">Cerimônia & Recepção</div>
+
+        <div class="timeline" style="grid-template-columns: repeat(2, minmax(180px, 1fr)); margin-top:14px;">
+          <div class="titem">
+            <div class="ticon"><i class="fa-solid fa-bell"></i></div>
+            <div class="ttime">16:00</div>
+            <div class="ttitle">Cerimônia</div>
+            <div class="tdesc">Um “sim” ao pôr do sol.</div>
+          </div>
+          <div class="titem">
+            <div class="ticon"><i class="fa-solid fa-champagne-glasses"></i></div>
+            <div class="ttime">18:00</div>
+            <div class="ttitle">Recepção</div>
+            <div class="tdesc">Brinde, jantar e celebração.</div>
+          </div>
+          <div class="titem">
+            <div class="ticon"><i class="fa-solid fa-camera-retro"></i></div>
+            <div class="ttime">20:30</div>
+            <div class="ttitle">Fotos</div>
+            <div class="tdesc">Momento especial com os noivos.</div>
+          </div>
+          <div class="titem">
+            <div class="ticon"><i class="fa-solid fa-music"></i></div>
+            <div class="ttime">21:00</div>
+            <div class="ttitle">Pista</div>
+            <div class="tdesc">DJ e muita energia até o fim.</div>
+          </div>
+        </div>
+
+        <p class="text" style="margin-top:16px;">
+          Chegue com antecedência para aproveitar o clima e receber as boas-vindas com calma.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="label">Contato</div>
+        <div class="big">Confirmações</div>
+        <p class="text" style="text-align:left">
+          Confirme sua presença até <b style="color:rgba(255,255,255,.92)">01 de Novembro</b>.
+          <br><br>
+          <i class="fa-solid fa-phone" style="color:var(--gold)"></i> (11) 98765-4321
+          <br>
+          <i class="fa-solid fa-phone" style="color:var(--gold)"></i> (11) 91234-5678
+        </p>
+
+        <div class="stats" id="stats"></div>
+        <div class="rsvp-list" id="rsvpList"></div>
+
+        <div class="rsvp-actions">
+          <button class="btn btn-gold" id="openRSVP3"><i class="fa-solid fa-pen-nib"></i>RSVP</button>
+          <button class="btn btn-ghost" id="exportCSV"><i class="fa-solid fa-file-arrow-down"></i>Exportar CSV</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local -->
+  <section id="local">
+    <div class="section-head">
+      <h2 class="section-title">Local</h2>
+      <p class="section-sub">
+        Chácara dos Eucaliptos — Estrada do Sol, 1234 — Jardim das Flores — São Paulo/SP
+      </p>
+    </div>
+
+    <div class="map">
+      <iframe
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Estrada%20do%20Sol%201234%20S%C3%A3o%20Paulo&output=embed"
+        title="Mapa do local">
+      </iframe>
+
+      <div class="overlay">
+        <div class="box">
+          <h3>CHÁCARA DOS EUCALIPTOS</h3>
+          <p>
+            Estrada do Sol, 1234 — Jardim das Flores<br>
+            São Paulo — SP
+          </p>
+          <div class="map-actions">
+            <a class="btn btn-gold" target="_blank"
+               href="https://maps.google.com/?q=Estrada%20do%20Sol%201234%20S%C3%A3o%20Paulo">
+              <i class="fa-solid fa-map-location-dot"></i> Abrir no Maps
+            </a>
+            <a class="btn btn-ghost" href="#rsvp">
+              <i class="fa-solid fa-circle-check"></i> Confirmar presença
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dress Code -->
+  <section id="dress">
+    <div class="section-head">
+      <h2 class="section-title">Dress Code</h2>
+      <p class="section-sub">
+        Social elegante em tons claros e neutros. Queremos uma noite atemporal.
+      </p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="label">Sugestão de paleta</div>
+        <div class="big">Cores que combinam com o cenário</div>
+
+        <div class="palette" aria-label="Paleta de cores">
+          <div class="swatch" style="background:#F2E8D8;"></div>
+          <div class="swatch" style="background:#DCC7A6;"></div>
+          <div class="swatch" style="background:#BCA07B;"></div>
+          <div class="swatch" style="background:#7A5C3E;"></div>
+          <div class="swatch" style="background:#111014;"></div>
+        </div>
+
+        <p class="text" style="margin-top:14px;">
+          Evite tons muito vibrantes. Se possível, priorize bege, nude, dourado suave e preto discreto.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="label">Trajes</div>
+        <div class="big">Para elas e para eles</div>
+
+        <div class="dress-grid">
+          <div class="dress">
+            <i class="fa-solid fa-person-dress"></i>
+            <h4>PARA ELAS</h4>
+            <p>Vestidos longos ou midi<br>Saltos confortáveis<br>Acessórios delicados</p>
+          </div>
+          <div class="dress">
+            <i class="fa-solid fa-user-tie"></i>
+            <h4>PARA ELES</h4>
+            <p>Terno em tons sóbrios<br>Camisa clara<br>Sapato social</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="rsvp">
+    <div style="font-family:'Playfair Display',serif; letter-spacing:.10em; font-size:1.25rem; color:rgba(255,255,255,.92)">
+      Com amor, <b>Ana & Pedro</b>
+    </div>
+    <div style="margin-top:10px;">
+      Será uma alegria celebrar com você ✦
+    </div>
+    <div style="margin-top:18px;">
+      <button class="btn btn-gold" id="openRSVP4"><i class="fa-solid fa-envelope-open-text"></i>Confirmar presença</button>
+    </div>
+  </footer>
+
+  <!-- RSVP Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
+      <div class="mhead">
+        <h3 id="rsvpTitle">RSVP — Confirmação de Presença</h3>
+        <button class="mx" id="closeModal" aria-label="Fechar">✕</button>
+      </div>
+      <div class="mbody">
+        <form id="rsvpForm">
+          <div class="row">
+            <div>
+              <label for="name">Nome *</label>
+              <input id="name" name="name" placeholder="Ex: Maria Souza" required>
+            </div>
+            <div>
+              <label for="phone">WhatsApp (opcional)</label>
+              <input id="phone" name="phone" placeholder="(11) 99999-9999" inputmode="tel">
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="status">Você irá? *</label>
+              <select id="status" name="status">
+                <option value="yes">Sim, estarei presente</option>
+                <option value="no">Não poderei ir</option>
+              </select>
+            </div>
+            <div>
+              <label for="guests">Acompanhantes</label>
+              <select id="guests" name="guests">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="msg">Mensagem (opcional)</label>
+          <textarea id="msg" name="msg" placeholder="Deixe uma mensagem especial..."></textarea>
+
+          <div class="mact">
+            <button type="button" class="btn btn-ghost" id="cancel">Cancelar</button>
+            <button type="submit" class="btn btn-gold"><i class="fa-solid fa-check"></i>Confirmar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ===== Scroll
+    const scrollDown = document.getElementById("scrollDown");
+    scrollDown?.addEventListener("click", () => {
+      window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+    });
+
+    // ===== Countdown (ajuste a data aqui)
+    const EVENT_DATE = new Date("November 18, 2026 16:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+
+    function tickCountdown(){
+      const now = Date.now();
+      const diff = EVENT_DATE - now;
+      if(diff <= 0){
+        countdownEl.textContent = "É hoje! ✦";
+        return;
+      }
+      const d = Math.floor(diff / (1000*60*60*24));
+      const h = Math.floor((diff / (1000*60*60)) % 24);
+      const m = Math.floor((diff / (1000*60)) % 60);
+      countdownEl.textContent = `${d} dias • ${h} horas • ${m} min`;
+    }
+    tickCountdown();
+    setInterval(tickCountdown, 30000);
+
+    // ===== Carousel premium (buttons + dots + swipe)
+    const track = document.getElementById("track");
+    const slides = Array.from(track.querySelectorAll(".slide"));
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+    const dotsWrap = document.getElementById("dots");
+    let index = 0;
+
+    function renderDots(){
+      dotsWrap.innerHTML = "";
+      slides.forEach((_, i)=>{
+        const d = document.createElement("button");
+        d.className = "dot" + (i === index ? " active" : "");
+        d.setAttribute("aria-label", `Ir para o slide ${i+1}`);
+        d.addEventListener("click", ()=> goTo(i, true));
+        dotsWrap.appendChild(d);
+      });
+    }
+
+    function goTo(i, user=false){
+      index = (i + slides.length) % slides.length;
+      track.style.transition = user ? "transform .55s cubic-bezier(.2,.85,.2,1)" : "transform .55s cubic-bezier(.2,.85,.2,1)";
+      track.style.transform = `translateX(${-index * 100}%)`;
+      renderDots();
+    }
+
+    prev.addEventListener("click", ()=> goTo(index - 1, true));
+    next.addEventListener("click", ()=> goTo(index + 1, true));
+    renderDots();
+
+    // autoplay (pausa quando a aba não está visível)
+    let auto = setInterval(()=> goTo(index + 1, false), 5200);
+    document.addEventListener("visibilitychange", ()=>{
+      clearInterval(auto);
+      if(!document.hidden) auto = setInterval(()=> goTo(index + 1, false), 5200);
+    });
+
+    // swipe
+    let startX = 0, dx = 0, dragging = false;
+    track.addEventListener("pointerdown", (e)=>{
+      dragging = true;
+      startX = e.clientX;
+      track.setPointerCapture(e.pointerId);
+      track.style.transition = "none";
+    });
+    track.addEventListener("pointermove", (e)=>{
+      if(!dragging) return;
+      dx = e.clientX - startX;
+      track.style.transform = `translateX(calc(${-index * 100}% + ${dx}px))`;
+    });
+    track.addEventListener("pointerup", ()=>{
+      if(!dragging) return;
+      dragging = false;
+      if(dx < -60) goTo(index + 1, true);
+      else if(dx > 60) goTo(index - 1, true);
+      else goTo(index, true);
+      dx = 0;
+    });
+
+    // ===== RSVP (LocalStorage)
+    const STORAGE_KEY = "wedding_rsvp_premium_v1";
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const openBtns = ["openRSVP","openRSVP2","openRSVP3","openRSVP4"].map(id=>document.getElementById(id)).filter(Boolean);
+    const closeModal = document.getElementById("closeModal");
+    const cancel = document.getElementById("cancel");
+    const form = document.getElementById("rsvpForm");
+    const toast = document.getElementById("toast");
+    const stats = document.getElementById("stats");
+    const rsvpList = document.getElementById("rsvpList");
+    const exportCSV = document.getElementById("exportCSV");
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.style.display = "block";
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=> toast.style.display = "none", 2600);
+    }
+
+    function openModal(){
+      modalBackdrop.style.display = "flex";
+      modalBackdrop.setAttribute("aria-hidden","false");
+      setTimeout(()=> document.getElementById("name").focus(), 80);
+    }
+    function closeIt(){
+      modalBackdrop.style.display = "none";
+      modalBackdrop.setAttribute("aria-hidden","true");
+    }
+
+    openBtns.forEach(b => b.addEventListener("click", openModal));
+    closeModal.addEventListener("click", closeIt);
+    cancel.addEventListener("click", closeIt);
+    modalBackdrop.addEventListener("click", (e)=>{ if(e.target === modalBackdrop) closeIt(); });
+    window.addEventListener("keydown", (e)=>{ if(e.key==="Escape" && modalBackdrop.style.display==="flex") closeIt(); });
+
+    function readList(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      }catch{ return []; }
+    }
+    function saveList(list){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+    function esc(s){
+      return String(s||"")
+        .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+    }
+
+    function renderRSVP(){
+      const list = readList();
+      const yes = list.filter(x=>x.status==="yes").length;
+      const no = list.filter(x=>x.status==="no").length;
+
+      stats.innerHTML = `
+        <div class="pill"><i class="fa-solid fa-users"></i> Total: ${list.length}</div>
+        <div class="pill"><i class="fa-solid fa-circle-check"></i> Confirmados: ${yes}</div>
+        <div class="pill"><i class="fa-solid fa-circle-xmark"></i> Não vão: ${no}</div>
+      `;
+
+      rsvpList.innerHTML = "";
+      if(list.length === 0){
+        rsvpList.innerHTML = `<div style="color:rgba(255,255,255,.65); text-align:center; padding:8px 0;">Nenhuma confirmação ainda.</div>`;
+        return;
+      }
+
+      list.slice().reverse().slice(0, 12).forEach(item=>{
+        const div = document.createElement("div");
+        div.className = "rsvp-item";
+        div.innerHTML = `
+          <div>
+            <div style="font-weight:800; color:rgba(255,255,255,.92)">${esc(item.name)}</div>
+            <div style="margin-top:3px; color:rgba(255,255,255,.65); font-size:.95rem">
+              acompanhantes: ${esc(item.guests)} • ${new Date(item.createdAt).toLocaleString()}
+            </div>
+          </div>
+          <div class="tag ${item.status==="yes" ? "yes" : "no"}">${item.status==="yes" ? "CONFIRMADO" : "NÃO VAI"}</div>
+        `;
+        rsvpList.appendChild(div);
+      });
+    }
+
+    function toCSV(list){
+      const header = ["nome","whatsapp","vai","acompanhantes","mensagem","data"];
+      const rows = list.map(x => [
+        x.name, x.phone, x.status==="yes" ? "sim" : "nao", x.guests, x.msg, new Date(x.createdAt).toISOString()
+      ].map(v => `"${String(v ?? "").replaceAll('"','""')}"`).join(","));
+      return header.join(",") + "\n" + rows.join("\n");
+    }
+    function download(filename, content){
+      const blob = new Blob([content], {type:"text/csv;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    form.addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const fd = new FormData(form);
+      const name = (fd.get("name")||"").toString().trim();
+      const phone = (fd.get("phone")||"").toString().trim();
+      const status = (fd.get("status")||"yes").toString();
+      const guests = (fd.get("guests")||"0").toString();
+      const msg = (fd.get("msg")||"").toString().trim();
+
+      if(!name){
+        showToast("Informe seu nome para confirmar.");
+        return;
+      }
+
+      const list = readList();
+      list.push({
+        id: (crypto?.randomUUID?.() || String(Date.now())),
+        name, phone, status, guests, msg,
+        createdAt: Date.now()
+      });
+      saveList(list);
+      renderRSVP();
+      closeIt();
+      form.reset();
+      showToast(status==="yes" ? "Presença confirmada ✦" : "Resposta registrada ✦");
+    });
+
+    exportCSV.addEventListener("click", ()=>{
+      const list = readList();
+      if(list.length === 0){
+        showToast("Não há dados para exportar.");
+        return;
+      }
+      download("rsvp-casamento.csv", toCSV(list));
+      showToast("CSV exportado!");
+    });
+
+    renderRSVP();
+  </script>
+</body>
+</html>

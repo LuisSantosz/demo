@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convite Exclusivo - Aniversário de Isabella</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Marcellus&family=Playfair+Display:wght@400;500;600&display=swap">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body{
+      font-family:'Cormorant Garamond', serif;
+      background:#0a0a0a;
+      color:#e6d6b8;
+      min-height:100vh;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    /* Fundo premium */
+    .luxury-bg{
+      position:fixed; inset:0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(148, 107, 45, 0.05) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0a0a 0%, #1a0a2a 100%);
+      z-index:-3;
+    }
+    .gold-texture{
+      position:fixed; inset:0;
+      background-image:url('https://www.transparenttextures.com/patterns/gold-scale.png');
+      opacity:0.03;
+      z-index:-2;
+    }
+
+    /* Diamantes */
+    .floating-diamond{
+      position:fixed;
+      width:25px; height:25px;
+      background:linear-gradient(45deg, transparent 48%, rgba(212,175,55,0.85) 50%, transparent 52%);
+      z-index:-1;
+      animation: floatDiamond 20s infinite linear;
+      filter: drop-shadow(0 0 8px rgba(212,175,55,0.6));
+      pointer-events:none;
+    }
+
+    /* Container */
+    .invitation-container{
+      max-width:1400px;
+      margin:0 auto;
+      padding:40px 20px;
+      position:relative;
+      z-index:1;
+    }
+
+    /* Topbar */
+    .topbar{
+      position:fixed; top:14px; left:50%;
+      transform:translateX(-50%);
+      width:min(1100px, calc(100% - 24px));
+      background: rgba(10,10,10,.55);
+      border:1px solid rgba(212,175,55,.25);
+      backdrop-filter: blur(14px);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 14px;
+      z-index:999;
+    }
+    .topbar .brand{
+      display:flex; align-items:center; gap:10px;
+      letter-spacing:2px;
+      font-family:'Playfair Display', serif;
+      color:#fff9d0;
+      font-size:1rem;
+      white-space:nowrap;
+    }
+    .topbar .dot{
+      width:9px; height:9px; border-radius:50%;
+      background:#d4af37;
+      box-shadow:0 0 0 6px rgba(212,175,55,.12);
+    }
+    .topbar nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .topbar nav a{
+      text-decoration:none;
+      color:#e6d6b8;
+      font-size:1rem;
+      opacity:.85;
+      padding:8px 10px;
+      border-radius:2px;
+      border:1px solid transparent;
+      transition:.25s ease;
+    }
+    .topbar nav a:hover{
+      opacity:1;
+      border-color: rgba(212,175,55,.35);
+      background: rgba(212,175,55,.06);
+    }
+
+    /* Header */
+    .luxury-header{
+      text-align:center;
+      padding:100px 0 80px;
+      position:relative;
+      overflow:hidden;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .reveal-overlay{
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, #0a0a0a 0%, #1a0a2a 100%);
+      z-index:-1;
+      animation: revealOverlay 2.5s ease-out forwards;
+    }
+
+    .golden-ornament{
+      font-size:3rem;
+      color:#d4af37;
+      margin:20px 0;
+      opacity:0;
+      animation: fadeIn 1s ease-out 2.5s forwards;
+    }
+
+    .main-title{
+      font-size:5rem;
+      margin-bottom:24px;
+      font-weight:300;
+      letter-spacing:8px;
+      color:transparent;
+      background: linear-gradient(45deg, #d4af37 0%, #fff9d0 30%, #d4af37 70%, #a67c00 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      text-shadow:0 0 60px rgba(212,175,55,0.4);
+      opacity:0;
+      transform: translateY(40px);
+      animation: fadeInDown 1s ease-out 1.5s forwards;
+    }
+
+    .age-display{
+      font-size:14rem;
+      font-family:'Marcellus', serif;
+      background: linear-gradient(45deg, #d4af37, #f7ef8a, #d4af37);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      margin:25px 0;
+      text-shadow: 0 0 80px rgba(212,175,55,0.7), 0 0 120px rgba(212,175,55,0.4);
+      cursor:pointer;
+      transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity:0;
+      transform: scale(0.8);
+      animation: fadeInScale 1.2s ease-out 2s forwards;
+    }
+    .age-display:hover{
+      transform:scale(1.05) rotate(2deg);
+      text-shadow:0 0 100px rgba(212,175,55,0.9), 0 0 150px rgba(212,175,55,0.6);
+    }
+
+    .header-subtitle{
+      font-size:2.1rem;
+      font-weight:300;
+      letter-spacing:4px;
+      margin:10px 0;
+      color:#e6d6b8;
+      opacity:0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out 2.8s forwards;
+    }
+
+    .hero-meta{
+      margin-top:26px;
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:center;
+      opacity:0;
+      animation: fadeIn 1s ease-out 3.1s forwards;
+    }
+    .pill{
+      border:1px solid rgba(212,175,55,.28);
+      background: rgba(15,8,25,.55);
+      padding:10px 14px;
+      border-radius:2px;
+      font-size:1.15rem;
+      color:#fff9d0;
+      display:flex; gap:10px; align-items:center;
+    }
+
+    .scroll-indicator{
+      position:absolute;
+      bottom:40px;
+      left:50%;
+      transform: translateX(-50%);
+      color:#d4af37;
+      font-size:1.5rem;
+      opacity:0;
+      animation: fadeIn 1s ease-out 3.5s forwards, bounce 2s infinite 3.5s;
+      cursor:pointer;
+    }
+
+    /* Conteúdo */
+    .main-content{ padding:60px 0; }
+
+    .content-section{
+      background: linear-gradient(145deg, rgba(30, 15, 40, 0.9) 0%, rgba(20, 10, 30, 0.95) 100%);
+      border-radius:2px;
+      padding:70px 50px;
+      margin:60px 0;
+      box-shadow:
+        0 0 100px rgba(212,175,55,0.15),
+        0 30px 60px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+      border:1px solid rgba(212,175,55,0.3);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .section-title{
+      font-size:3.5rem;
+      margin-bottom:35px;
+      color:#d4af37;
+      font-weight:300;
+      letter-spacing:4px;
+      text-align:center;
+      position:relative;
+      padding-bottom:18px;
+    }
+    .section-title::after{
+      content:'';
+      position:absolute;
+      bottom:0; left:50%;
+      transform: translateX(-50%);
+      width:150px;
+      height:2px;
+      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    }
+
+    .section-content{
+      font-size:1.5rem;
+      line-height:1.9;
+      color:#b8a988;
+      text-align:justify;
+      margin-bottom:40px;
+      padding:0 20px;
+    }
+    .highlight{ color:#d4af37; font-weight:600; }
+
+    /* Timeline */
+    .event-timeline{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap:40px;
+      margin:50px 0 10px;
+    }
+    .timeline-item{
+      text-align:center;
+      padding:40px 30px;
+      background: rgba(15,8,25,0.7);
+      border-radius:2px;
+      border:1px solid rgba(212,175,55,0.2);
+      transition: all .5s ease;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+    }
+    .timeline-item:hover{
+      transform: translateY(-10px);
+      border-color: rgba(212,175,55,0.5);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.2);
+    }
+    .timeline-icon{ font-size:3rem; color:#d4af37; margin-bottom:25px; text-shadow:0 0 20px rgba(212,175,55,0.5); }
+    .timeline-time{ font-size:2.2rem; font-family:'Marcellus', serif; color:#fff9d0; margin-bottom:10px; }
+    .timeline-title{ font-size:1.5rem; color:#e6d6b8; margin-bottom:15px; letter-spacing:2px; }
+    .timeline-description{ font-size:1.2rem; color:#b8a988; line-height:1.6; }
+
+    /* Galeria (novo) */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:16px;
+      margin-top:20px;
+    }
+    .photo{
+      border:1px solid rgba(212,175,55,.22);
+      background: rgba(15,8,25,.5);
+      overflow:hidden;
+      position:relative;
+      border-radius:2px;
+      min-height: 220px;
+    }
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.92;
+      transform: scale(1.01);
+      transition: .5s ease;
+      display:block;
+    }
+    .photo:hover img{ transform: scale(1.08); opacity:1; }
+    .photo.big{ grid-column: span 6; min-height: 360px; }
+    .photo.med{ grid-column: span 3; }
+    .photo.small{ grid-column: span 3; }
+
+    /* Cards */
+    .guests-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap:30px;
+      margin-top:40px;
+    }
+    .guest-card{
+      text-align:center;
+      padding:30px 20px;
+      background: rgba(15,8,25,0.6);
+      border-radius:2px;
+      border:1px solid rgba(212,175,55,0.2);
+      transition: all .3s ease;
+    }
+    .guest-card:hover{
+      border-color: rgba(212,175,55,0.5);
+      transform: translateY(-5px);
+    }
+    .guest-initial{
+      font-size:3rem;
+      color:#d4af37;
+      margin-bottom:15px;
+      font-family:'Playfair Display', serif;
+      transition: transform .25s ease;
+    }
+    .guest-name{ font-size:1.3rem; color:#e6d6b8; margin-bottom:10px; }
+    .guest-relation{ font-size:1rem; color:#b8a988; font-style: italic; }
+
+    /* Menu */
+    .menu-items{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap:25px;
+    }
+    .menu-item{
+      padding:25px;
+      background: rgba(15,8,25,0.5);
+      border-left:3px solid rgba(212,175,55,0.5);
+      transition: .3s ease;
+    }
+    .item-name{ font-size:1.6rem; color:#e6d6b8; margin-bottom:10px; }
+    .item-description{ font-size:1.2rem; color:#b8a988; line-height:1.6; }
+
+    /* Mapa real (corrigido) */
+    .map-container{
+      height:520px;
+      border-radius:2px;
+      overflow:hidden;
+      border:1px solid rgba(212,175,55,0.3);
+      margin:40px 0;
+      position:relative;
+      background: rgba(15, 8, 25, 0.7);
+    }
+    .map-iframe{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:0;
+      filter: saturate(0.9) contrast(1.05) brightness(0.85);
+      opacity:0.65;
+    }
+    .map-overlay{
+      position:absolute; inset:0;
+      background: linear-gradient(45deg, rgba(212,175,55,0.08), transparent);
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:40px;
+    }
+    .map-title{ font-size:2.5rem; color:#d4af37; margin-bottom:18px; }
+    .map-address{ font-size:1.35rem; color:#e6d6b8; margin-bottom:24px; line-height:1.6; }
+    .map-button{
+      padding:14px 34px;
+      background: transparent;
+      border:1px solid #d4af37;
+      color:#d4af37;
+      font-size:1.15rem;
+      cursor:pointer;
+      transition: all .3s ease;
+      text-decoration:none;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+    }
+    .map-button:hover{
+      background: rgba(212,175,55,0.12);
+      transform: translateY(-3px);
+    }
+
+    /* FAQ (novo) */
+    .faq{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      margin-top:20px;
+    }
+    details{
+      background: rgba(15,8,25,0.55);
+      border:1px solid rgba(212,175,55,0.22);
+      padding:18px 18px;
+      border-radius:2px;
+    }
+    summary{
+      cursor:pointer;
+      font-size:1.3rem;
+      color:#fff9d0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details p{
+      margin-top:12px;
+      color:#b8a988;
+      font-size:1.2rem;
+      line-height:1.7;
+    }
+
+    /* Rodapé */
+    .luxury-footer{
+      margin-top:100px;
+      padding:60px 0;
+      text-align:center;
+      border-top:1px solid rgba(212,175,55,0.3);
+      position:relative;
+    }
+    .footer-title{
+      font-size:2.5rem;
+      color:#d4af37;
+      margin-bottom:20px;
+      letter-spacing:4px;
+    }
+    .footer-contact{
+      font-size:1.3rem;
+      color:#e6d6b8;
+      margin-bottom:20px;
+      line-height:1.8;
+    }
+
+    .rsvp-button{
+      padding:18px 50px;
+      background: linear-gradient(45deg, rgba(212,175,55,0.12), rgba(212,175,55,0.22));
+      border:1px solid rgba(212,175,55,0.35);
+      color:#d4af37;
+      font-size:1.25rem;
+      cursor:pointer;
+      transition: all .3s ease;
+      margin-top:22px;
+      letter-spacing:2px;
+    }
+    .rsvp-button:hover{
+      background: linear-gradient(45deg, rgba(212,175,55,0.2), rgba(212,175,55,0.3));
+      border-color: rgba(212,175,55,0.65);
+      transform: translateY(-5px);
+    }
+
+    /* RSVP modal */
+    .rsvp-modal{
+      display:none;
+      position:fixed; inset:0;
+      background: rgba(5,0,10,0.95);
+      z-index:2000;
+      justify-content:center;
+      align-items:center;
+      animation: fadeIn .3s;
+      padding: 18px;
+    }
+    .modal-content{
+      background: linear-gradient(145deg, rgba(30,15,40,0.95), rgba(20,10,30,0.98));
+      border:2px solid rgba(212,175,55,0.5);
+      padding:42px 34px;
+      max-width:650px;
+      width:100%;
+      position:relative;
+      box-shadow:0 0 100px rgba(212,175,55,0.3);
+    }
+    .close-modal{
+      position:absolute;
+      top:14px; right:16px;
+      font-size:2.3rem;
+      color:#d4af37;
+      cursor:pointer;
+      transition: color .3s;
+    }
+    .close-modal:hover{ color:#fff9d0; }
+
+    .modal-title{
+      font-size:2.3rem;
+      color:#d4af37;
+      margin-bottom:20px;
+      text-align:center;
+      letter-spacing:3px;
+    }
+
+    .form-group{ margin-bottom:18px; }
+    .form-label{
+      display:block;
+      font-size:1.2rem;
+      color:#e6d6b8;
+      margin-bottom:8px;
+    }
+    .form-input, .form-select{
+      width:100%;
+      padding:14px 14px;
+      background: rgba(15,8,25,0.7);
+      border:1px solid rgba(212,175,55,0.3);
+      color:#e6d6b8;
+      font-size:1.1rem;
+      font-family:'Cormorant Garamond', serif;
+    }
+    .form-input:focus, .form-select:focus{
+      outline:none;
+      border-color: rgba(212,175,55,0.7);
+      box-shadow: 0 0 0 4px rgba(212,175,55,.12);
+    }
+
+    .rsvp-stats{
+      margin-top:18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      color:#fff9d0;
+      font-size:1.15rem;
+      opacity:.95;
+    }
+
+    .rsvp-list{
+      margin-top:16px;
+      display:grid;
+      gap:10px;
+      max-height: 220px;
+      overflow:auto;
+      padding-right: 4px;
+    }
+    .rsvp-item{
+      border:1px solid rgba(212,175,55,.18);
+      background: rgba(15,8,25,.55);
+      padding:12px 12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      font-size:1.1rem;
+    }
+    .tag{
+      letter-spacing:.12em;
+      text-transform: uppercase;
+      font-weight:700;
+      font-size:.85rem;
+    }
+    .tag.yes{ color:#48d189; }
+    .tag.no{ color:#ff8a6a; }
+
+    .toast{
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.85);
+      border: 1px solid rgba(212,175,55,.25);
+      color: #fff9d0;
+      padding: 10px 14px;
+      z-index: 4000;
+      display:none;
+      font-size: 1.1rem;
+    }
+
+    /* Animations */
+    @keyframes revealOverlay { 0%{ transform: translateY(0); } 100%{ transform: translateY(-100%);} }
+    @keyframes fadeInDown { to { opacity:1; transform: translateY(0);} }
+    @keyframes fadeInUp { to { opacity:1; transform: translateY(0);} }
+    @keyframes fadeInScale { to { opacity:1; transform: scale(1);} }
+    @keyframes fadeIn { to { opacity:1; } }
+    @keyframes bounce {
+      0%,20%,50%,80%,100% { transform: translateY(0) translateX(-50%); }
+      40% { transform: translateY(-18px) translateX(-50%); }
+      60% { transform: translateY(-9px) translateX(-50%); }
+    }
+    @keyframes floatDiamond {
+      0% { transform: translateY(100vh) rotate(0deg); opacity:0; }
+      10% { opacity:.7; }
+      90% { opacity:.7; }
+      100% { transform: translateY(-120px) rotate(360deg); opacity:0; }
+    }
+
+    /* Responsivo */
+    @media (max-width: 1024px){
+      .main-title{ font-size:4rem; }
+      .age-display{ font-size:10rem; }
+      .section-title{ font-size:2.8rem; }
+      .gallery .photo.big{ grid-column: span 12; }
+      .gallery .photo.med{ grid-column: span 6; }
+      .gallery .photo.small{ grid-column: span 6; }
+    }
+    @media (max-width: 860px){
+      .topbar nav{ display:none; }
+      .faq{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px){
+      .main-title{ font-size:3rem; letter-spacing:5px; }
+      .age-display{ font-size:7rem; }
+      .header-subtitle{ font-size:1.5rem; letter-spacing:2px; }
+      .content-section{ padding:40px 22px; }
+      .section-content{ font-size:1.25rem; padding:0; }
+      .modal-content{ padding:34px 20px; }
+    }
+    @media (max-width: 480px){
+      .main-title{ font-size:2.4rem; letter-spacing:3px; }
+      .age-display{ font-size:5.2rem; }
+      .section-title{ font-size:2.15rem; }
+      .timeline-item{ padding:30px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="luxury-bg"></div>
+  <div class="gold-texture"></div>
+  <div id="diamondsContainer"></div>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span> Convite Exclusivo</div>
+    <nav>
+      <a href="#celebracao">Celebração</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#local">Local</a>
+      <a href="#dresscode">Dress Code</a>
+      <a href="#faq">FAQ</a>
+      <a href="#rsvp">RSVP</a>
+    </nav>
+  </div>
+
+  <div class="invitation-container">
+    <header class="luxury-header">
+      <div class="reveal-overlay"></div>
+
+      <div class="golden-ornament">✦</div>
+      <h1 class="main-title" id="typedTitle">ISABELLA MONTEIRO</h1>
+
+      <div class="age-display" id="ageDisplay" title="Clique para um brilho especial">30</div>
+
+      <div class="golden-ornament">❖</div>
+
+      <p class="header-subtitle">CONVIDA PARA A CELEBRAÇÃO DE SEU ANIVERSÁRIO</p>
+      <p class="header-subtitle">UMA NOITE DE ELEGÂNCIA, BRILHO E MEMÓRIAS DOURADAS</p>
+
+      <div class="hero-meta">
+        <div class="pill"><i class="fa-solid fa-calendar-days"></i> 15 de Dezembro de 2026</div>
+        <div class="pill"><i class="fa-solid fa-clock"></i> 19:00</div>
+        <div class="pill"><i class="fa-solid fa-location-dot"></i> Palácio das Estrelas</div>
+      </div>
+
+      <div class="scroll-indicator" id="scrollIndicator">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </header>
+
+    <div class="main-content">
+
+      <!-- Celebração -->
+      <section class="content-section" id="celebracao">
+        <h2 class="section-title">A CELEBRAÇÃO</h2>
+
+        <div class="section-content">
+          <p>Trinta anos de vida, histórias e conquistas merecem uma celebração à altura. É com imensa alegria que convido você para fazer parte deste marco especial, onde cada detalhe foi cuidadosamente pensado para criar momentos inesquecíveis.</p>
+
+          <p style="margin-top: 26px;">A noite será uma verdadeira <span class="highlight">experiência sensorial</span>, combinando gastronomia refinada, música impecável, decoração exclusiva e a energia única que só os verdadeiros amigos e familiares podem proporcionar.</p>
+
+          <p style="margin-top: 26px;">Este não é apenas mais um aniversário — é a celebração de três décadas de vida, amor e crescimento. <span class="highlight">Sua presença é o presente mais valioso</span>.</p>
+
+          <p style="margin-top: 26px; text-align:center; font-size:1.35rem; color:#fff9d0;">
+            <i class="fa-solid fa-hourglass-half"></i> <span id="countdownText">Carregando contagem...</span>
+          </p>
+        </div>
+
+        <div class="event-timeline">
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-glass-cheers"></i></div>
+            <div class="timeline-time">19:00</div>
+            <div class="timeline-title">WELCOME DRINK</div>
+            <div class="timeline-description">Coquetel de boas-vindas com espumante e canapés exclusivos</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-utensils"></i></div>
+            <div class="timeline-time">20:30</div>
+            <div class="timeline-title">JANTAR</div>
+            <div class="timeline-description">Menu degustação assinado pelo Chef internacional</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-birthday-cake"></i></div>
+            <div class="timeline-time">22:00</div>
+            <div class="timeline-title">MOMENTO DO BOLO</div>
+            <div class="timeline-description">Celebração com brindes, fotos e um toque surpresa</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-music"></i></div>
+            <div class="timeline-time">22:30</div>
+            <div class="timeline-title">FESTA</div>
+            <div class="timeline-description">DJ exclusivo e pista de dança até 02:00</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Galeria (novo) -->
+      <section class="content-section" id="galeria">
+        <h2 class="section-title">GALERIA</h2>
+
+        <div class="section-content">
+          <p>Alguns instantes capturados — porque as melhores memórias merecem brilhar para sempre. Você pode trocar as fotos depois (eu te explico como) e deixar com a cara da Isabella.</p>
+        </div>
+
+        <div class="gallery">
+          <div class="photo big">
+            <img alt="Foto 1" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1600&q=80">
+          </div>
+          <div class="photo med">
+            <img alt="Foto 2" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80">
+          </div>
+          <div class="photo med">
+            <img alt="Foto 3" src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=80">
+          </div>
+          <div class="photo small">
+            <img alt="Foto 4" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80">
+          </div>
+          <div class="photo small">
+            <img alt="Foto 5" src="https://images.unsplash.com/photo-1520975958225-0c05cf6f7bfe?auto=format&fit=crop&w=1200&q=80">
+          </div>
+          <div class="photo small">
+            <img alt="Foto 6" src="https://images.unsplash.com/photo-1520975682071-9b2f4d9b6c4d?auto=format&fit=crop&w=1200&q=80">
+          </div>
+          <div class="photo small">
+            <img alt="Foto 7" src="https://images.unsplash.com/photo-1520975751352-9f5c2e4e3a35?auto=format&fit=crop&w=1200&q=80">
+          </div>
+        </div>
+      </section>
+
+      <!-- Convidados especiais -->
+      <section class="content-section">
+        <h2 class="section-title">CONVIDADOS ESPECIAIS</h2>
+
+        <div class="section-content">
+          <p>Esta celebração reúne as pessoas mais importantes da minha jornada. Cada rosto representa uma história, um momento especial, uma memória que carrego com carinho.</p>
+        </div>
+
+        <div class="guests-grid">
+          <div class="guest-card">
+            <div class="guest-initial">M</div>
+            <div class="guest-name">Mariana & Rafael</div>
+            <div class="guest-relation">Irmãos & Cunhados</div>
+          </div>
+          <div class="guest-card">
+            <div class="guest-initial">P</div>
+            <div class="guest-name">Paulo & Beatriz</div>
+            <div class="guest-relation">Pais</div>
+          </div>
+          <div class="guest-card">
+            <div class="guest-initial">C</div>
+            <div class="guest-name">Carlos Santos</div>
+            <div class="guest-relation">Padrinho</div>
+          </div>
+          <div class="guest-card">
+            <div class="guest-initial">S</div>
+            <div class="guest-name">Sofia Mendes</div>
+            <div class="guest-relation">Melhor Amiga</div>
+          </div>
+          <div class="guest-card">
+            <div class="guest-initial">A</div>
+            <div class="guest-name">Ana & João</div>
+            <div class="guest-relation">Amigos da Faculdade</div>
+          </div>
+          <div class="guest-card">
+            <div class="guest-initial">T</div>
+            <div class="guest-name">Tio Miguel</div>
+            <div class="guest-relation">Família</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Menu degustação -->
+      <section class="content-section menu-section">
+        <h2 class="section-title">MENU DEGUSTAÇÃO</h2>
+
+        <div class="section-content">
+          <p>Uma experiência gastronômica exclusiva preparada especialmente para esta noite pelo Chef <span class="highlight">Antônio Borges</span>, premiado internacionalmente. Cada prato conta uma história e celebra os sabores da vida.</p>
+        </div>
+
+        <h3 style="text-align:center; letter-spacing:3px; color:#d4af37; font-size:2.2rem; margin:40px 0 18px;">ENTRADAS</h3>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="item-name">Tartar de Salmão Real</div>
+            <div class="item-description">Salmão norueguês, abacate, toque de wasabi e chips de batata-doce</div>
+          </div>
+          <div class="menu-item">
+            <div class="item-name">Foie Gras Trufado</div>
+            <div class="item-description">Com geleia de figo e brioche tostado</div>
+          </div>
+        </div>
+
+        <h3 style="text-align:center; letter-spacing:3px; color:#d4af37; font-size:2.2rem; margin:50px 0 18px;">PRINCIPAL</h3>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="item-name">Wagyu Grado A5</div>
+            <div class="item-description">Purê de mandioquinha e redução de vinho tinto</div>
+          </div>
+          <div class="menu-item">
+            <div class="item-name">Risoto de Lagosta</div>
+            <div class="item-description">Arroz arbóreo, lagosta e açafrão</div>
+          </div>
+        </div>
+
+        <h3 style="text-align:center; letter-spacing:3px; color:#d4af37; font-size:2.2rem; margin:50px 0 18px;">SOBREMESAS</h3>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="item-name">Bolo Aniversário</div>
+            <div class="item-description">Camadas delicadas, baunilha e frutas vermelhas</div>
+          </div>
+          <div class="menu-item">
+            <div class="item-name">Degustação de Chocolate</div>
+            <div class="item-description">Três texturas com chocolate belga</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Local -->
+      <section class="content-section" id="local">
+        <h2 class="section-title">O LOCAL</h2>
+
+        <div class="section-content">
+          <p>A celebração acontecerá no exclusivo <span class="highlight">Palácio das Estrelas</span>, um dos espaços mais cobiçados da cidade, conhecido por sua arquitetura imponente e jardins deslumbrantes.</p>
+        </div>
+
+        <div class="map-container">
+          <!-- Mapa real (troque a query pelo endereço certo) -->
+          <iframe
+            class="map-iframe"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Avenida%20das%20Magn%C3%B3lias%201500%20S%C3%A3o%20Paulo&output=embed"></iframe>
+
+          <div class="map-overlay">
+            <h3 class="map-title">PALÁCIO DAS ESTRELAS</h3>
+            <p class="map-address">
+              Avenida das Magnólias, 1500<br>
+              Jardim Europa<br>
+              São Paulo - SP<br>
+              CEP: 01455-000
+            </p>
+            <a href="https://maps.google.com/?q=Avenida%20das%20Magn%C3%B3lias%201500%20S%C3%A3o%20Paulo" target="_blank" class="map-button">
+              <i class="fas fa-map-marked-alt"></i> VER NO MAPA
+            </a>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top: 20px; color:#b8a988; font-size:1.25rem; line-height:1.8;">
+          <div><i class="fas fa-car" style="margin-right: 10px;"></i> Estacionamento VIP disponível</div>
+          <div><i class="fas fa-user-tie" style="margin-right: 10px;"></i> Valet privativo</div>
+          <div><i class="fas fa-wine-glass-alt" style="margin-right: 10px;"></i> Open bar premium até 02:00</div>
+        </div>
+      </section>
+
+      <!-- Dress Code -->
+      <section class="content-section" id="dresscode">
+        <h2 class="section-title">DRESS CODE</h2>
+
+        <div class="section-content">
+          <p>Para manter a elegância e sofisticação da noite, sugerimos um traje à altura do brilho desta celebração. Se quiser, você pode indicar uma paleta de cores para fotos ainda mais bonitas.</p>
+
+          <p style="margin-top:22px; text-align:center; font-size:1.35rem; color:#fff9d0;">
+            Paleta sugerida:
+            <span class="highlight">Dourado</span> •
+            <span class="highlight">Preto</span> •
+            <span class="highlight">Vinho</span> •
+            <span class="highlight">Nude</span>
+          </p>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 40px;">
+          <div style="text-align:center; padding:30px; border:1px solid rgba(212,175,55,0.3); background: rgba(15,8,25,0.5);">
+            <div style="font-size:3rem; color:#d4af37; margin-bottom: 20px;"><i class="fas fa-female"></i></div>
+            <h3 style="font-size:1.8rem; color:#e6d6b8; margin-bottom: 15px;">PARA ELAS</h3>
+            <p style="color:#b8a988; line-height:1.6;">
+              Vestidos longos ou cocktail<br>
+              Acessórios: joias e brilhos<br>
+              Sapatos elegantes
+            </p>
+          </div>
+
+          <div style="text-align:center; padding:30px; border:1px solid rgba(212,175,55,0.3); background: rgba(15,8,25,0.5);">
+            <div style="font-size:3rem; color:#d4af37; margin-bottom: 20px;"><i class="fas fa-male"></i></div>
+            <h3 style="font-size:1.8rem; color:#e6d6b8; margin-bottom: 15px;">PARA ELES</h3>
+            <p style="color:#b8a988; line-height:1.6;">
+              Terno escuro ou smoking<br>
+              Gravata ou borboleta<br>
+              Sapatos sociais
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ (novo) -->
+      <section class="content-section" id="faq">
+        <h2 class="section-title">FAQ</h2>
+
+        <div class="section-content">
+          <p>Algumas perguntas comuns para facilitar a noite e evitar dúvidas. Se quiser, eu coloco também um botão de “Chamar no WhatsApp”.</p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Posso levar acompanhante? <i class="fa-solid fa-chevron-down"></i></summary>
+            <p>Sim — informe a quantidade no RSVP para organizarmos tudo com carinho.</p>
+          </details>
+          <details>
+            <summary>Terá estacionamento? <i class="fa-solid fa-chevron-down"></i></summary>
+            <p>Sim, com valet privativo e área VIP no local.</p>
+          </details>
+          <details>
+            <summary>Que horas devo chegar? <i class="fa-solid fa-chevron-down"></i></summary>
+            <p>Recomendamos chegar entre 18:45 e 19:15 para aproveitar o welcome drink.</p>
+          </details>
+          <details>
+            <summary>Há opções sem álcool? <i class="fa-solid fa-chevron-down"></i></summary>
+            <p>Sim — teremos drinks sem álcool e opções especiais para todos.</p>
+          </details>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="luxury-footer" id="rsvp">
+      <h2 class="footer-title">CONFIRME SUA PRESENÇA</h2>
+
+      <p class="footer-contact">
+        Para confirmar ou obter mais informações:<br>
+        <i class="fas fa-phone" style="margin-right: 10px;"></i> (11) 98765-4321<br>
+        <i class="fas fa-envelope" style="margin-right: 10px;"></i> isabella30@celebracao.com
+      </p>
+
+      <p style="font-size:1.2rem; color:#b8a988; margin-top: 18px;">
+        <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
+        Confirmações até <span class="highlight">10 de Dezembro de 2026</span>
+      </p>
+
+      <button class="rsvp-button" id="rsvpButton">
+        <i class="fas fa-pen-fancy"></i> CONFIRMAR PRESENÇA AGORA
+      </button>
+
+      <div class="rsvp-stats" id="rsvpStats"></div>
+      <div class="rsvp-list" id="rsvpList"></div>
+
+      <p style="margin-top: 40px; color:#8a7a5e; font-size:1.1rem;">
+        Com amor e gratidão,<br>
+        <span style="font-size: 1.8rem; color:#d4af37;">Isabella</span>
+      </p>
+    </footer>
+  </div>
+
+  <!-- Modal RSVP -->
+  <div class="rsvp-modal" id="rsvpModal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <span class="close-modal" id="closeModal" aria-label="Fechar">&times;</span>
+      <h2 class="modal-title">CONFIRMAÇÃO DE PRESENÇA</h2>
+
+      <form id="rsvpForm">
+        <!-- IMPORTANTE: names para o FormData funcionar -->
+        <div class="form-group">
+          <label class="form-label" for="nome">Nome Completo *</label>
+          <input id="nome" name="nome" type="text" class="form-input" required placeholder="Digite seu nome completo">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">E-mail *</label>
+          <input id="email" name="email" type="email" class="form-input" required placeholder="seu.email@exemplo.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="telefone">Telefone</label>
+          <input id="telefone" name="telefone" type="tel" class="form-input" placeholder="(11) 99999-9999">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="vai">Você vai?</label>
+          <select id="vai" name="vai" class="form-select">
+            <option value="sim">Sim, estarei presente</option>
+            <option value="nao">Não poderei ir</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="acompanhantes">Quantidade de Acompanhantes</label>
+          <select id="acompanhantes" name="acompanhantes" class="form-select">
+            <option value="0">0 - Vou sozinho(a)</option>
+            <option value="1">1 acompanhante</option>
+            <option value="2">2 acompanhantes</option>
+            <option value="3">3 acompanhantes</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="restricoes">Restrições Alimentares</label>
+          <textarea id="restricoes" name="restricoes" class="form-input" rows="3" placeholder="Alguma restrição alimentar?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="mensagem">Mensagem para a Aniversariante</label>
+          <textarea id="mensagem" name="mensagem" class="form-input" rows="4" placeholder="Deixe uma mensagem especial para Isabella..."></textarea>
+        </div>
+
+        <button type="submit" class="rsvp-button" style="width: 100%;">
+          <i class="fas fa-check-circle"></i> ENVIAR CONFIRMAÇÃO
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ===== Helpers
+    const $ = (s) => document.querySelector(s);
+
+    function toast(msg){
+      const t = $("#toast");
+      t.textContent = msg;
+      t.style.display = "block";
+      clearTimeout(toast._t);
+      toast._t = setTimeout(()=> t.style.display = "none", 2600);
+    }
+
+    // ===== Diamonds
+    document.addEventListener('DOMContentLoaded', () => {
+      createFloatingDiamonds(12);
+      initInteractions();
+      setupSmoothScroll();
+      initRSVP();
+      startCountdown();
+      revealSectionsOnScroll();
+    });
+
+    function createFloatingDiamonds(count){
+      const container = document.getElementById('diamondsContainer');
+      for(let i=0;i<count;i++){
+        const d = document.createElement('div');
+        d.className = 'floating-diamond';
+        d.style.left = Math.random()*100 + 'vw';
+        d.style.animationDelay = (Math.random()*20) + 's';
+        const size = Math.random()*20 + 14;
+        d.style.width = size + 'px';
+        d.style.height = size + 'px';
+        d.style.opacity = Math.random()*0.45 + 0.25;
+        container.appendChild(d);
+      }
+    }
+
+    // ===== Age click effect
+    const ageDisplay = document.getElementById('ageDisplay');
+    let age = 30;
+    ageDisplay.addEventListener('click', function(){
+      age++;
+      this.textContent = age;
+      createGoldenConfetti();
+    });
+
+    function createGoldenConfetti(){
+      const colors = ['#d4af37', '#f7ef8a', '#a67c00', '#fff9d0'];
+      for(let i=0;i<46;i++){
+        const c = document.createElement('div');
+        c.style.position='fixed';
+        c.style.width='10px';
+        c.style.height='10px';
+        c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+        c.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        c.style.left = Math.random()*100 + 'vw';
+        c.style.top = '-20px';
+        c.style.zIndex = '3000';
+        c.style.opacity = '0.85';
+        document.body.appendChild(c);
+
+        const anim = c.animate([
+          { transform:'translateY(0) rotate(0deg)', opacity:1 },
+          { transform:`translateY(${window.innerHeight + 80}px) rotate(${Math.random()*360}deg)`, opacity:0 }
+        ], {
+          duration: Math.random()*2800 + 1800,
+          easing:'cubic-bezier(0.215, 0.610, 0.355, 1)'
+        });
+        anim.onfinish = () => c.remove();
+      }
+    }
+
+    // ===== Modal RSVP
+    const rsvpButton = document.getElementById('rsvpButton');
+    const rsvpModal  = document.getElementById('rsvpModal');
+    const closeModal = document.getElementById('closeModal');
+    const rsvpForm   = document.getElementById('rsvpForm');
+
+    rsvpButton.addEventListener('click', () => {
+      rsvpModal.style.display = 'flex';
+      rsvpModal.setAttribute("aria-hidden","false");
+      document.body.style.overflow = 'hidden';
+      setTimeout(()=> $("#nome").focus(), 80);
+    });
+
+    closeModal.addEventListener('click', closeRSVP);
+    rsvpModal.addEventListener('click', (e)=> { if(e.target === rsvpModal) closeRSVP(); });
+    window.addEventListener('keydown', (e)=> { if(e.key === "Escape" && rsvpModal.style.display === "flex") closeRSVP(); });
+
+    function closeRSVP(){
+      rsvpModal.style.display = 'none';
+      rsvpModal.setAttribute("aria-hidden","true");
+      document.body.style.overflow = 'auto';
+    }
+
+    // ===== RSVP storage + render
+    const RSVP_KEY = "lux_rsvp_list_v1";
+
+    function readRSVP(){
+      try{
+        const raw = localStorage.getItem(RSVP_KEY);
+        return raw ? JSON.parse(raw) : [];
+      }catch{
+        return [];
+      }
+    }
+    function saveRSVP(list){
+      localStorage.setItem(RSVP_KEY, JSON.stringify(list));
+    }
+
+    function renderRSVP(){
+      const list = readRSVP();
+      const yes = list.filter(x => x.vai === "sim").length;
+      const no  = list.filter(x => x.vai === "nao").length;
+      const total = list.length;
+
+      $("#rsvpStats").innerHTML = `
+        <span class="pill"><i class="fa-solid fa-users"></i> Total: ${total}</span>
+        <span class="pill"><i class="fa-solid fa-circle-check"></i> Confirmados: ${yes}</span>
+        <span class="pill"><i class="fa-solid fa-circle-xmark"></i> Não vão: ${no}</span>
+      `;
+
+      const box = $("#rsvpList");
+      box.innerHTML = "";
+      if(total === 0){
+        box.innerHTML = `<div style="text-align:center;color:#b8a988;font-size:1.15rem;">Nenhuma confirmação ainda.</div>`;
+        return;
+      }
+
+      // recentes primeiro
+      list.slice().reverse().slice(0, 10).forEach(item => {
+        const div = document.createElement("div");
+        div.className = "rsvp-item";
+        div.innerHTML = `
+          <div>
+            <div style="color:#fff9d0;font-weight:700;">${escapeHtml(item.nome)}</div>
+            <div style="color:#b8a988;font-size:1.05rem;margin-top:2px;">
+              acompanhantes: ${item.acompanhantes || 0} • ${new Date(item.createdAt).toLocaleString()}
+            </div>
+          </div>
+          <div class="tag ${item.vai === "sim" ? "yes" : "no"}">
+            ${item.vai === "sim" ? "CONFIRMADO" : "NÃO VAI"}
+          </div>
+        `;
+        box.appendChild(div);
+      });
+    }
+
+    function escapeHtml(str){
+      return String(str || "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function initRSVP(){
+      renderRSVP();
+      rsvpForm.addEventListener('submit', function(e){
+        e.preventDefault();
+
+        const fd = new FormData(this);
+        const nome = (fd.get("nome") || "").toString().trim();
+        const email = (fd.get("email") || "").toString().trim();
+        const telefone = (fd.get("telefone") || "").toString().trim();
+        const vai = (fd.get("vai") || "sim").toString();
+        const acompanhantes = (fd.get("acompanhantes") || "0").toString();
+        const restricoes = (fd.get("restricoes") || "").toString().trim();
+        const mensagem = (fd.get("mensagem") || "").toString().trim();
+
+        if(!nome || !email){
+          toast("Preencha nome e e-mail para confirmar.");
+          return;
+        }
+
+        const list = readRSVP();
+        list.push({
+          id: (crypto?.randomUUID?.() || String(Date.now())),
+          nome, email, telefone, vai, acompanhantes, restricoes, mensagem,
+          createdAt: Date.now()
+        });
+
+        saveRSVP(list);
+        renderRSVP();
+
+        closeRSVP();
+        this.reset();
+
+        toast(vai === "sim" ? `Obrigada, ${nome}! Presença confirmada ✨` : `Registrado, ${nome}. Obrigada por avisar ✨`);
+        createGoldenConfetti();
+      });
+    }
+
+    // ===== Scroll indicator
+    function setupSmoothScroll(){
+      const scrollIndicator = document.getElementById('scrollIndicator');
+      scrollIndicator.addEventListener('click', () => {
+        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+      });
+    }
+
+    // ===== Reveal sections
+    function revealSectionsOnScroll(){
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(s => {
+        s.style.opacity = '0';
+        s.style.transform = 'translateY(30px)';
+        s.style.transition = 'opacity .8s ease, transform .8s ease';
+      });
+
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, {threshold:0.12, rootMargin:'0px 0px -60px 0px'});
+
+      sections.forEach(s => obs.observe(s));
+    }
+
+    // ===== Interactions
+    function initInteractions(){
+      document.querySelectorAll('.guest-card').forEach(card=>{
+        card.addEventListener('mouseenter', () => card.querySelector('.guest-initial').style.transform='scale(1.18)');
+        card.addEventListener('mouseleave', () => card.querySelector('.guest-initial').style.transform='scale(1)');
+      });
+
+      document.querySelectorAll('.menu-item').forEach(item=>{
+        item.addEventListener('mouseenter', ()=>{
+          item.style.borderLeftColor='rgba(212,175,55,0.85)';
+          item.style.transform='translateX(8px)';
+        });
+        item.addEventListener('mouseleave', ()=>{
+          item.style.borderLeftColor='rgba(212,175,55,0.5)';
+          item.style.transform='translateX(0)';
+        });
+      });
+
+      // Efeito de digitação no título (sem quebrar animação)
+      const mainTitle = document.getElementById('typedTitle');
+      const originalText = mainTitle.textContent.trim();
+      mainTitle.textContent = '';
+      let i = 0;
+      setTimeout(function type(){
+        if(i < originalText.length){
+          mainTitle.textContent += originalText.charAt(i);
+          i++;
+          setTimeout(type, 70);
+        }
+      }, 1600);
+    }
+
+    // ===== Countdown (corrigido)
+    // Troque a data aqui:
+    const EVENT_DATE = new Date('December 15, 2026 19:00:00').getTime();
+
+    function startCountdown(){
+      const el = document.getElementById("countdownText");
+      function tick(){
+        const now = Date.now();
+        const diff = EVENT_DATE - now;
+        if(diff <= 0){
+          el.textContent = "É hoje! ✨";
+          return;
+        }
+        const d = Math.floor(diff / (1000*60*60*24));
+        const h = Math.floor((diff / (1000*60*60)) % 24);
+        const m = Math.floor((diff / (1000*60)) % 60);
+        el.textContent = `Faltam ${d} dias, ${h} horas e ${m} minutos.`;
+      }
+      tick();
+      setInterval(tick, 30000);
+    }
+  </script>
+</body>
+</html>
