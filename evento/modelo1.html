@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quermesse • Convite Oficial</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root{
+      --bg:#0c0b10;
+      --paper:#f7f1e6;
+      --paper2:#fbf6ee;
+      --ink:#1b1a20;
+      --muted:#5b5663;
+
+      --wine:#7a1f3d;
+      --gold:#d7b46a;
+      --amber:#f0b429;
+      --leaf:#2e7d5b;
+
+      --radius:22px;
+      --shadow: 0 26px 90px rgba(0,0,0,.45);
+      --shadowSoft: 0 18px 50px rgba(0,0,0,.18);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(215,180,106,.16), transparent 55%),
+        radial-gradient(1200px 700px at 80% 10%, rgba(122,31,61,.14), transparent 55%),
+        radial-gradient(1000px 700px at 50% 100%, rgba(46,125,91,.12), transparent 55%),
+        linear-gradient(180deg, #07060a, #0c0b10);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* container */
+    .wrap{max-width:1160px;margin:0 auto;padding:0 18px}
+
+    /* top ribbon */
+    .ribbon{
+      position: sticky;
+      top: 12px;
+      z-index: 30;
+      margin-top: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(247,241,230,.14);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      color: rgba(255,255,255,.92);
+    }
+
+    .brand{
+      display:flex;align-items:center;gap:10px;white-space:nowrap
+    }
+    .seal{
+      width:34px;height:34px;border-radius:999px;
+      background:
+        radial-gradient(circle at 35% 35%, rgba(255,255,255,.35), transparent 45%),
+        linear-gradient(135deg, var(--gold), var(--amber));
+      box-shadow: 0 0 0 6px rgba(215,180,106,.12);
+      display:grid;place-items:center;
+      color:#241a08;
+      font-weight:900;
+      font-family: "Playfair Display", serif;
+    }
+    .brand b{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+    .brand small{opacity:.85}
+
+    .nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+    .nav a{
+      color: rgba(255,255,255,.86);
+      text-decoration:none;
+      font-weight:600;
+      font-size:.92rem;
+      padding: 10px 12px;
+      border-radius:999px;
+      border: 1px solid transparent;
+      transition:.2s ease;
+    }
+    .nav a:hover{
+      border-color: rgba(215,180,106,.45);
+      background: rgba(215,180,106,.14);
+      transform: translateY(-1px);
+    }
+
+    .btn{
+      appearance:none;border:0;cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight:800;
+      font-size:.92rem;
+      transition:.2s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn-gold{
+      background: linear-gradient(135deg, var(--gold), var(--amber));
+      color: #241a08;
+      box-shadow: 0 14px 40px rgba(215,180,106,.25);
+    }
+    .btn-gold:hover{transform: translateY(-2px); filter: brightness(.98)}
+    .btn-ghost{
+      background: rgba(247,241,230,.14);
+      color: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .btn-ghost:hover{transform: translateY(-1px); background: rgba(247,241,230,.20)}
+
+    /* HERO as "convite em papel" */
+    .hero{padding: 22px 0 26px}
+    .card{
+      border-radius: calc(var(--radius) + 10px);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 0;
+    }
+
+    .poster{
+      position:relative;
+      min-height: 520px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.0), rgba(0,0,0,.55)),
+        url("https://images.unsplash.com/photo-1520975941323-6c5e0a38d2f2?auto=format&fit=crop&w=2200&q=80")
+        center/cover no-repeat;
+      filter: saturate(.95) contrast(1.05);
+    }
+
+    /* bandeirinhas minimalistas */
+    .flags{
+      position:absolute;left:18px;top:18px;right:18px;
+      display:flex;gap:8px;flex-wrap:wrap;
+      opacity:.92;
+      pointer-events:none;
+    }
+    .flag{
+      width: 18px;height: 18px;
+      clip-path: polygon(50% 0, 100% 35%, 80% 100%, 20% 100%, 0 35%);
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.14);
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    }
+    .flag:nth-child(3n+1){ background: rgba(215,180,106,.22); border-color: rgba(215,180,106,.55); }
+    .flag:nth-child(3n+2){ background: rgba(122,31,61,.20); border-color: rgba(122,31,61,.45); }
+    .flag:nth-child(3n+3){ background: rgba(46,125,91,.18); border-color: rgba(46,125,91,.40); }
+
+    /* convite (paper) */
+    .paper{
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(215,180,106,.10), transparent 55%),
+        linear-gradient(180deg, var(--paper2), var(--paper));
+      color: var(--ink);
+      position:relative;
+      padding: 26px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap: 18px;
+    }
+
+    .paper::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+      opacity:.22;
+      pointer-events:none;
+      mix-blend-mode: multiply;
+    }
+
+    .paperInner{position:relative; z-index:1}
+
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      font-weight:800;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:.78rem;
+      color: rgba(27,26,32,.72);
+    }
+    .kicker .dot{
+      width:10px;height:10px;border-radius:999px;background: var(--wine);
+      box-shadow: 0 0 0 6px rgba(122,31,61,.10);
+    }
+
+    .h1{
+      font-family:"Playfair Display", serif;
+      font-weight: 700;
+      font-size: clamp(2.2rem, 3.1vw, 3.2rem);
+      line-height: 1.05;
+      margin-top: 12px;
+    }
+
+    .lead{
+      margin-top: 12px;
+      color: rgba(27,26,32,.78);
+      line-height: 1.85;
+      max-width: 60ch;
+      font-size: 1.03rem;
+    }
+
+    .stampRow{
+      margin-top: 16px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .stamp{
+      display:inline-flex; gap:10px; align-items:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(215,180,106,.16);
+      border: 1px solid rgba(215,180,106,.34);
+      color: rgba(27,26,32,.88);
+      font-weight:800;
+      font-size:.92rem;
+    }
+    .stamp i{ color: var(--wine); }
+
+    .miniGrid{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .mini{
+      border-radius: 18px;
+      border: 1px solid rgba(27,26,32,.12);
+      background: rgba(255,255,255,.55);
+      box-shadow: var(--shadowSoft);
+      padding: 12px;
+    }
+    .mini .k{
+      font-size:.78rem;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color: rgba(27,26,32,.55);
+    }
+    .mini .v{
+      margin-top: 6px;
+      font-weight:900;
+      color: rgba(27,26,32,.92);
+      line-height:1.25;
+    }
+
+    .paperActions{
+      position:relative; z-index:1;
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+    }
+
+    /* sections */
+    section{padding: 74px 0}
+    .sectionHead{
+      text-align:center;
+      margin-bottom: 26px;
+      color: rgba(255,255,255,.92);
+    }
+    .h2{
+      font-family:"Playfair Display", serif;
+      font-size: clamp(1.85rem, 2.6vw, 2.55rem);
+      letter-spacing:.01em;
+    }
+    .p{
+      margin-top: 10px;
+      color: rgba(255,255,255,.72);
+      line-height: 1.85;
+      max-width: 78ch;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .infoCard{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      overflow:hidden;
+      position:relative;
+    }
+    .infoCard .top{
+      padding: 16px;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .ico{
+      width:44px;height:44px;border-radius: 16px;
+      display:grid;place-items:center;
+      background: rgba(215,180,106,.14);
+      border: 1px solid rgba(215,180,106,.28);
+      color: var(--gold);
+      flex: 0 0 auto;
+    }
+    .infoCard h3{
+      font-family:"Playfair Display", serif;
+      font-size: 1.18rem;
+      margin-top: 2px;
+      color: rgba(255,255,255,.92);
+    }
+    .infoCard p{
+      margin-top: 10px;
+      color: rgba(255,255,255,.70);
+      line-height: 1.75;
+    }
+
+    .divider{
+      height:1px;background: rgba(255,255,255,.10);
+      margin: 0 16px;
+    }
+
+    .infoCard .bottom{
+      padding: 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .tag{
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:.78rem;
+      color: rgba(255,255,255,.78);
+    }
+
+    /* programação */
+    .prog{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items:start;
+    }
+    .timeline{
+      display:grid; gap: 10px;
+    }
+    .rowItem{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      padding: 14px;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      transition:.2s ease;
+    }
+    .rowItem:hover{
+      transform: translateY(-2px);
+      border-color: rgba(215,180,106,.26);
+      background: rgba(215,180,106,.08);
+    }
+    .time{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      min-width: 74px;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.92);
+    }
+    .rowItem b{display:block;color: rgba(255,255,255,.92)}
+    .rowItem small{display:block;margin-top:6px;color: rgba(255,255,255,.70);line-height:1.6}
+
+    /* map */
+    .map{
+      height: 420px;
+      border-radius: calc(var(--radius) + 10px);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      position:relative;
+      background: rgba(255,255,255,.06);
+    }
+    .map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:.78;filter: saturate(.95) contrast(1.05) brightness(.92)}
+    .mapOverlay{
+      position:absolute;inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.62));
+      display:flex;align-items:flex-end;justify-content:center;
+      padding: 16px;
+    }
+    .mapBox{
+      width:min(900px,100%);
+      border-radius: var(--radius);
+      background: rgba(12,11,16,.70);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(14px);
+      padding: 16px;
+      color: rgba(255,255,255,.90);
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+      align-items:center;
+      box-shadow: 0 20px 70px rgba(0,0,0,.55);
+    }
+    .mapBox b{
+      font-family:"Playfair Display", serif;
+      letter-spacing:.03em;
+      font-size: 1.15rem;
+    }
+    .mapBox span{color: rgba(255,255,255,.70);line-height:1.6}
+
+    /* RSVP modal */
+    .backdrop{
+      position:fixed; inset:0; display:none;
+      align-items:center; justify-content:center;
+      background: rgba(0,0,0,.72);
+      z-index: 999;
+      padding: 18px;
+    }
+    .modal{
+      width:min(720px,100%);
+      border-radius: calc(var(--radius) + 10px);
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(12,11,16,.82);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 28px 110px rgba(0,0,0,.75);
+      overflow:hidden;
+      color: rgba(255,255,255,.92);
+    }
+    .modalHead{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .modalHead h3{
+      font-family:"Playfair Display", serif;
+      letter-spacing:.04em;
+      font-size: 1.15rem;
+    }
+    .x{
+      width:44px;height:44px;border-radius:999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.92);
+      cursor:pointer; transition:.2s ease;
+    }
+    .x:hover{transform: translateY(-1px); background: rgba(255,255,255,.12)}
+    .modalBody{padding: 16px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{
+      display:block;
+      margin-top: 12px;
+      font-weight:800;
+      font-size: .92rem;
+      color: rgba(255,255,255,.86);
+    }
+    input, select, textarea{
+      width:100%;
+      margin-top: 8px;
+      padding: 12px 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.92);
+      outline:none;
+      font-size: 1rem;
+      font-family: Inter, sans-serif;
+    }
+    textarea{min-height: 110px; resize: vertical}
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(215,180,106,.65);
+      box-shadow: 0 0 0 4px rgba(215,180,106,.18);
+    }
+    .actions{
+      display:flex;
+      justify-content:flex-end;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 14px;
+    }
+
+    /* RSVP list */
+    .rsvpBox{
+      margin-top: 12px;
+      display:grid;
+      gap: 10px;
+    }
+    .stats{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    .pill{
+      display:inline-flex;gap:10px;align-items:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.88);
+      font-weight:800;
+      font-size:.92rem;
+    }
+    .pill i{ color: var(--gold); }
+    .list{
+      max-height: 260px;
+      overflow:auto;
+      display:grid;
+      gap: 10px;
+      padding-right: 4px;
+    }
+    .li{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      padding: 12px;
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .yes{color:#5cf3b2;font-weight:900;letter-spacing:.14em;font-size:.78rem}
+    .no{color:#ffad88;font-weight:900;letter-spacing:.14em;font-size:.78rem}
+
+    footer{
+      padding: 60px 0 74px;
+      text-align:center;
+      color: rgba(255,255,255,.72);
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+
+    /* responsive */
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns: 1fr}
+      .poster{min-height: 420px}
+      .grid3{grid-template-columns: 1fr}
+      .prog{grid-template-columns: 1fr}
+    }
+    @media (max-width: 760px){
+      .nav{display:none}
+      .miniGrid{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body id="topo">
+  <div class="wrap">
+    <div class="ribbon">
+      <div class="brand">
+        <div class="seal">Q</div>
+        <div>
+          <b>Quermesse</b> <small>• Convite Oficial</small>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#atracoes">Atrações</a>
+        <a href="#comidas">Comidas</a>
+        <a href="#programacao">Programação</a>
+        <a href="#local">Local</a>
+        <a href="#rsvp">RSVP</a>
+      </nav>
+
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a class="btn btn-ghost" href="#local"><i class="fa-solid fa-location-dot"></i>Mapa</a>
+        <button class="btn btn-gold" id="openRSVP"><i class="fa-solid fa-check"></i>Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <main class="wrap hero">
+    <div class="card">
+      <div class="heroGrid">
+        <div class="poster">
+          <div class="flags" aria-hidden="true">
+            <div class="flag"></div><div class="flag"></div><div class="flag"></div><div class="flag"></div><div class="flag"></div>
+            <div class="flag"></div><div class="flag"></div><div class="flag"></div><div class="flag"></div><div class="flag"></div>
+            <div class="flag"></div><div class="flag"></div><div class="flag"></div><div class="flag"></div><div class="flag"></div>
+          </div>
+        </div>
+
+        <aside class="paper">
+          <div class="paperInner">
+            <div class="kicker"><span class="dot"></span> festa • família • tradição</div>
+            <div class="h1">Quermesse da Comunidade</div>
+            <p class="lead">
+              Um encontro especial com <b>comidas típicas</b>, <b>brincadeiras</b> e <b>música ao vivo</b>.
+              Traga a família e venha viver uma noite inesquecível.
+            </p>
+
+            <div class="stampRow">
+              <span class="stamp"><i class="fa-regular fa-calendar"></i> Sáb, 20 de Julho</span>
+              <span class="stamp"><i class="fa-regular fa-clock"></i> 18:00 — 00:00</span>
+              <span class="stamp"><i class="fa-solid fa-ticket"></i> Entrada gratuita</span>
+            </div>
+
+            <div class="miniGrid">
+              <div class="mini">
+                <div class="k">Local</div>
+                <div class="v">Salão Paroquial</div>
+              </div>
+              <div class="mini">
+                <div class="k">Destaques</div>
+                <div class="v">Quadrilha + Show</div>
+              </div>
+              <div class="mini">
+                <div class="k">Barracas</div>
+                <div class="v">Doces & Salgados</div>
+              </div>
+              <div class="mini">
+                <div class="k">Brincadeiras</div>
+                <div class="v">Pescaria • Argola</div>
+              </div>
+            </div>
+
+            <div class="paperActions">
+              <button class="btn btn-gold" id="openRSVP2"><i class="fa-solid fa-check"></i>Confirmar presença</button>
+              <button class="btn btn-ghost" id="addCalendar"><i class="fa-solid fa-calendar-plus"></i>Calendário</button>
+              <button class="btn btn-ghost" id="shareBtn"><i class="fa-brands fa-whatsapp"></i>Compartilhar</button>
+            </div>
+
+            <div style="margin-top:14px; color:rgba(27,26,32,.72); font-weight:800;">
+              Contagem regressiva: <span id="countdown" style="font-family:'Playfair Display',serif; color:rgba(27,26,32,.92)"></span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- ATRACOES -->
+  <section id="atracoes" class="wrap">
+    <div class="sectionHead">
+      <div class="h2">Atrações</div>
+      <div class="p">Uma noite completa para todas as idades — com clima acolhedor e organização caprichada.</div>
+    </div>
+
+    <div class="grid3">
+      <article class="infoCard">
+        <div class="top">
+          <div class="ico"><i class="fa-solid fa-music"></i></div>
+          <div>
+            <h3>Música ao vivo</h3>
+            <p>Show animado com repertório para curtir em família e dançar com os amigos.</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="bottom">
+          <span class="tag">Palco principal</span>
+          <span class="btn btn-ghost" style="pointer-events:none; padding:8px 12px;"><i class="fa-solid fa-wave-square"></i> Ao vivo</span>
+        </div>
+      </article>
+
+      <article class="infoCard">
+        <div class="top">
+          <div class="ico"><i class="fa-solid fa-people-group"></i></div>
+          <div>
+            <h3>Quadrilha</h3>
+            <p>Apresentação especial e momentos de interação — venha a caráter se quiser!</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="bottom">
+          <span class="tag">20:30</span>
+          <span class="btn btn-ghost" style="pointer-events:none; padding:8px 12px;"><i class="fa-solid fa-fire"></i> Tradicional</span>
+        </div>
+      </article>
+
+      <article class="infoCard">
+        <div class="top">
+          <div class="ico"><i class="fa-solid fa-gamepad"></i></div>
+          <div>
+            <h3>Brincadeiras</h3>
+            <p>Pescaria, argola, correio elegante e diversas atividades com prêmios.</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="bottom">
+          <span class="tag">Área kids</span>
+          <span class="btn btn-ghost" style="pointer-events:none; padding:8px 12px;"><i class="fa-solid fa-gift"></i> Prêmios</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- COMIDAS -->
+  <section id="comidas" class="wrap">
+    <div class="sectionHead">
+      <div class="h2">Comidas típicas</div>
+      <div class="p">Edite os itens abaixo com as barracas reais do seu evento (mantive um cardápio bem cheio).</div>
+    </div>
+
+    <div class="grid3">
+      <article class="infoCard">
+        <div class="top">
+          <div class="ico"><i class="fa-solid fa-drumstick-bite"></i></div>
+          <div>
+            <h3>Salgados</h3>
+            <p>
+              Espetinho • Pastel • Cachorro-quente • Milho • Caldos • Tapioca • Sanduíches
+            </p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="bottom">
+          <span class="tag">Barraca 01</span>
+          <button class="btn btn-ghost" style="padding:8px 12px" onclick="toast('Salgados: disponíveis a partir das 18h!')"><i class="fa-solid fa-circle-info"></i>Info</button>
+        </div>
+      </article>
+
+      <article class="infoCard">
+        <div class="top">
+          <div class="ico"><i class="fa-solid fa-cookie-bite"></i></div>
+          <div>
+            <h3>Doces</h3>
+            <p>
+              Canjica • Maçã do amor • Paçoca • Pé-de-moleque • Bolo de milho • Doce de abóbora
+            </p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="bottom">
+          <span class="tag">Barraca 02</span>
+          <button class="btn btn-ghost" style="padding:8px 12px" onclick="toast('Doces: não deixe para o final 😉')"><i class="fa-solid fa-circle-info"></i>Info</button>
+        </div>
+      </article>
+
+      <article class="infoCard">
+        <div class="top">
+          <div class="ico"><i class="fa-solid fa-mug-hot"></i></div>
+          <div>
+            <h3>Bebidas</h3>
+            <p>
+              Quentão • Chocolate quente • Refrigerante • Sucos • Água • Café
+            </p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="bottom">
+          <span class="tag">Barraca 03</span>
+          <button class="btn btn-ghost" style="padding:8px 12px" onclick="toast('Bebidas quentes: perfeitas para a noite!')"><i class="fa-solid fa-circle-info"></i>Info</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROGRAMAÇÃO + RSVP LIST -->
+  <section id="programacao" class="wrap">
+    <div class="sectionHead">
+      <div class="h2">Programação</div>
+      <div class="p">Um roteiro elegante e bem organizado para você ajustar do jeito que quiser.</div>
+    </div>
+
+    <div class="prog">
+      <div class="infoCard" style="padding:16px;">
+        <div class="top" style="padding:0 0 12px 0;">
+          <div class="ico"><i class="fa-solid fa-list-check"></i></div>
+          <div>
+            <h3>Horários</h3>
+            <p>Chegue cedo para aproveitar as brincadeiras sem fila e garantir as melhores comidas.</p>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="rowItem">
+            <div class="time">18:00</div>
+            <div><b>Abertura</b><small>Início das barracas e brincadeiras.</small></div>
+          </div>
+          <div class="rowItem">
+            <div class="time">19:30</div>
+            <div><b>Música ao vivo</b><small>Show com repertório animado.</small></div>
+          </div>
+          <div class="rowItem">
+            <div class="time">20:30</div>
+            <div><b>Quadrilha</b><small>Apresentação principal da noite.</small></div>
+          </div>
+          <div class="rowItem">
+            <div class="time">22:00</div>
+            <div><b>Sorteio</b><small>Prêmios e surpresas (se houver).</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="infoCard" style="padding:16px;">
+        <div class="top" style="padding:0 0 12px 0;">
+          <div class="ico"><i class="fa-solid fa-clipboard-check"></i></div>
+          <div>
+            <h3 id="rsvp">Confirmações (RSVP)</h3>
+            <p>As confirmações ficam salvas neste dispositivo (localStorage). Você pode exportar CSV.</p>
+          </div>
+        </div>
+
+        <div class="rsvpBox">
+          <div class="stats" id="stats"></div>
+          <div class="list" id="rsvpList"></div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
+            <button class="btn btn-ghost" id="exportCSV"><i class="fa-solid fa-file-arrow-down"></i>Exportar CSV</button>
+            <button class="btn btn-ghost" id="clearData"><i class="fa-solid fa-trash"></i>Limpar</button>
+            <button class="btn btn-gold" id="openRSVP3"><i class="fa-solid fa-check"></i>RSVP</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCAL -->
+  <section id="local" class="wrap">
+    <div class="sectionHead">
+      <div class="h2">Local do evento</div>
+      <div class="p">Troque o endereço abaixo pelo local real da quermesse.</div>
+    </div>
+
+    <div class="map">
+      <iframe
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Rua%20Exemplo%20123%20Brasil&output=embed"
+        title="Mapa do evento"></iframe>
+
+      <div class="mapOverlay">
+        <div class="mapBox">
+          <div>
+            <b>Salão Paroquial • (Nome da Paróquia)</b><br>
+            <span>Rua Exemplo, 123 — Bairro — Cidade/UF<br>Referência: ao lado da praça principal</span>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a class="btn btn-gold" target="_blank" href="https://maps.google.com/?q=Rua%20Exemplo%20123"><i class="fa-solid fa-map-location-dot"></i>Abrir Maps</a>
+            <button class="btn btn-ghost" id="openRSVP4"><i class="fa-solid fa-check"></i>Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div style="font-family:'Playfair Display',serif;font-size:1.25rem;color:rgba(255,255,255,.92)">
+        Quermesse • <b>Festa da Comunidade</b>
+      </div>
+      <div style="margin-top:10px;">Traga a família. Compartilhe com os amigos. 💛</div>
+
+      <div style="margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-gold" id="openRSVP5"><i class="fa-solid fa-check"></i>Confirmar</button>
+        <a class="btn btn-ghost" href="#topo"><i class="fa-solid fa-arrow-up"></i>Topo</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL RSVP -->
+  <div class="backdrop" id="backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
+      <div class="modalHead">
+        <h3 id="rsvpTitle">RSVP • Confirmação de Presença</h3>
+        <button class="x" id="closeModal" aria-label="Fechar">✕</button>
+      </div>
+
+      <div class="modalBody">
+        <form id="rsvpForm">
+          <div class="grid2">
+            <div>
+              <label for="nome">Nome *</label>
+              <input id="nome" name="nome" placeholder="Ex: João Silva" required />
+            </div>
+            <div>
+              <label for="whats">WhatsApp (opcional)</label>
+              <input id="whats" name="whats" placeholder="(00) 00000-0000" inputmode="tel" />
+            </div>
+          </div>
+
+          <div class="grid2">
+            <div>
+              <label for="vai">Você vai? *</label>
+              <select id="vai" name="vai">
+                <option value="sim">Sim, eu vou!</option>
+                <option value="nao">Não vou conseguir</option>
+              </select>
+            </div>
+            <div>
+              <label for="pessoas">Quantas pessoas (incluindo você)?</label>
+              <select id="pessoas" name="pessoas">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5+">5+</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="msg">Mensagem (opcional)</label>
+          <textarea id="msg" name="msg" placeholder="Ex: Vou chegar por volta das 20h :)"></textarea>
+
+          <div class="actions">
+            <button type="button" class="btn btn-ghost" id="cancel"><i class="fa-solid fa-ban"></i>Cancelar</button>
+            <button type="submit" class="btn btn-gold"><i class="fa-solid fa-check"></i>Confirmar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" style="
+    position:fixed; left:50%; bottom:20px; transform:translateX(-50%);
+    background: rgba(12,11,16,.85); color: rgba(255,255,255,.92);
+    border:1px solid rgba(255,255,255,.14); backdrop-filter: blur(14px);
+    padding: 12px 14px; border-radius: 999px; box-shadow: 0 20px 70px rgba(0,0,0,.55);
+    display:none; z-index: 9999; font-weight:800;">
+  </div>
+
+  <script>
+    // ===== CONFIG (edite a data do evento) =====
+    const EVENT_DATE = new Date("July 20, 2026 18:00:00").getTime();
+
+    // ===== Countdown =====
+    const countdownEl = document.getElementById("countdown");
+    function tick(){
+      const diff = EVENT_DATE - Date.now();
+      if(diff <= 0){ countdownEl.textContent = "É hoje! 🎉"; return; }
+      const d = Math.floor(diff / (1000*60*60*24));
+      const h = Math.floor((diff / (1000*60*60)) % 24);
+      const m = Math.floor((diff / (1000*60)) % 60);
+      countdownEl.textContent = `${d} dias • ${h}h • ${m}min`;
+    }
+    tick();
+    setInterval(tick, 30000);
+
+    // ===== Toast =====
+    const toastEl = document.getElementById("toast");
+    let toastTimer = null;
+    function toast(msg){
+      toastEl.textContent = msg;
+      toastEl.style.display = "block";
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=> toastEl.style.display = "none", 2000);
+    }
+
+    // ===== RSVP (LocalStorage) =====
+    const STORAGE_KEY = "quermesse_rsvp_premium_v2";
+    const backdrop = document.getElementById("backdrop");
+
+    const openBtns = ["openRSVP","openRSVP2","openRSVP3","openRSVP4","openRSVP5"]
+      .map(id => document.getElementById(id)).filter(Boolean);
+
+    const closeModal = document.getElementById("closeModal");
+    const cancel = document.getElementById("cancel");
+    const form = document.getElementById("rsvpForm");
+    const statsEl = document.getElementById("stats");
+    const listEl = document.getElementById("rsvpList");
+    const exportCSV = document.getElementById("exportCSV");
+    const clearData = document.getElementById("clearData");
+    const shareBtn = document.getElementById("shareBtn");
+    const addCalendar = document.getElementById("addCalendar");
+
+    function openModal(){
+      backdrop.style.display = "flex";
+      backdrop.setAttribute("aria-hidden","false");
+      setTimeout(()=> document.getElementById("nome").focus(), 60);
+    }
+    function closeIt(){
+      backdrop.style.display = "none";
+      backdrop.setAttribute("aria-hidden","true");
+    }
+    openBtns.forEach(b => b.addEventListener("click", openModal));
+    closeModal.addEventListener("click", closeIt);
+    cancel.addEventListener("click", closeIt);
+    backdrop.addEventListener("click", (e)=>{ if(e.target === backdrop) closeIt(); });
+    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape" && backdrop.style.display==="flex") closeIt(); });
+
+    function readList(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      }catch{ return []; }
+    }
+    function saveList(list){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+    function esc(s){
+      return String(s||"")
+        .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+    }
+
+    function render(){
+      const list = readList();
+      const confirmedPeople = list
+        .filter(x=>x.vai==="sim")
+        .reduce((acc,x)=> acc + (x.pessoasNum||1), 0);
+      const noCount = list.filter(x=>x.vai==="nao").length;
+
+      statsEl.innerHTML = `
+        <span class="pill"><i class="fa-solid fa-users"></i> Respostas: ${list.length}</span>
+        <span class="pill"><i class="fa-solid fa-circle-check"></i> Pessoas confirmadas: ${confirmedPeople}</span>
+        <span class="pill"><i class="fa-solid fa-circle-xmark"></i> Não vão: ${noCount}</span>
+      `;
+
+      listEl.innerHTML = "";
+      if(list.length === 0){
+        listEl.innerHTML = `<div style="color:rgba(255,255,255,.70); text-align:center; padding:8px 0;">Nenhuma confirmação ainda.</div>`;
+        return;
+      }
+
+      list.slice().reverse().slice(0, 12).forEach(item=>{
+        const div = document.createElement("div");
+        div.className = "li";
+        div.innerHTML = `
+          <div>
+            <div style="font-weight:900;color:rgba(255,255,255,.92)">${esc(item.nome)}</div>
+            <div style="margin-top:3px;color:rgba(255,255,255,.70);font-size:.95rem">
+              pessoas: ${esc(item.pessoas)} • ${new Date(item.createdAt).toLocaleString()}
+            </div>
+            ${item.msg ? `<div style="margin-top:6px;color:rgba(255,255,255,.72);font-size:.95rem;line-height:1.55">“${esc(item.msg)}”</div>` : ``}
+          </div>
+          <div class="${item.vai==="sim" ? "yes" : "no"}">${item.vai==="sim" ? "CONFIRMADO" : "NÃO VAI"}</div>
+        `;
+        listEl.appendChild(div);
+      });
+    }
+
+    form.addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const fd = new FormData(form);
+      const nome = (fd.get("nome")||"").toString().trim();
+      const whats = (fd.get("whats")||"").toString().trim();
+      const vai = (fd.get("vai")||"sim").toString();
+      const pessoas = (fd.get("pessoas")||"1").toString();
+      const msg = (fd.get("msg")||"").toString().trim();
+      if(!nome){ toast("Digite seu nome."); return; }
+
+      const pessoasNum = pessoas === "5+" ? 5 : parseInt(pessoas, 10);
+
+      const list = readList();
+      list.push({
+        id: (crypto?.randomUUID?.() || String(Date.now())),
+        nome, whats, vai, pessoas,
+        pessoasNum: Number.isFinite(pessoasNum) ? pessoasNum : 1,
+        msg,
+        createdAt: Date.now()
+      });
+
+      saveList(list);
+      render();
+      closeIt();
+      form.reset();
+      toast("RSVP salvo com sucesso!");
+    });
+
+    function toCSV(list){
+      const header = ["nome","whatsapp","vai","pessoas","mensagem","data_iso"];
+      const rows = list.map(x => [
+        x.nome, x.whats, x.vai, x.pessoas, x.msg, new Date(x.createdAt).toISOString()
+      ].map(v => `"${String(v ?? "").replaceAll('"','""')}"`).join(","));
+      return header.join(",") + "\n" + rows.join("\n");
+    }
+    function download(filename, content){
+      const blob = new Blob([content], {type:"text/csv;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    exportCSV.addEventListener("click", ()=>{
+      const list = readList();
+      if(list.length === 0){ toast("Sem RSVPs para exportar."); return; }
+      download("rsvp-quermesse.csv", toCSV(list));
+      toast("CSV baixado!");
+    });
+
+    clearData.addEventListener("click", ()=>{
+      localStorage.removeItem(STORAGE_KEY);
+      render();
+      toast("RSVPs removidos deste dispositivo.");
+    });
+
+    // ===== Share =====
+    shareBtn.addEventListener("click", async ()=>{
+      const text = "🎉 Quermesse da Comunidade — comidas típicas, brincadeiras e música ao vivo! Veja:";
+      const url = window.location.href;
+
+      if(navigator.share){
+        try{ await navigator.share({ title:"Quermesse", text, url }); return; }catch(e){}
+      }
+      window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`, "_blank");
+    });
+
+    // ===== Calendar (.ics) =====
+    addCalendar.addEventListener("click", ()=>{
+      const start = new Date(EVENT_DATE);
+      const end = new Date(EVENT_DATE + (4*60*60*1000));
+      const pad = (n)=> String(n).padStart(2,"0");
+      const toICS = (d)=> (
+        d.getUTCFullYear() +
+        pad(d.getUTCMonth()+1) +
+        pad(d.getUTCDate()) + "T" +
+        pad(d.getUTCHours()) +
+        pad(d.getUTCMinutes()) +
+        pad(d.getUTCSeconds()) + "Z"
+      );
+
+      const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Quermesse//Convite//PT-BR
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+DTSTAMP:${toICS(new Date())}
+DTSTART:${toICS(start)}
+DTEND:${toICS(end)}
+SUMMARY:Quermesse da Comunidade
+DESCRIPTION:Comidas típicas, brincadeiras e música ao vivo.
+LOCATION:Rua Exemplo, 123 - Bairro - Cidade/UF
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([ics], {type:"text/calendar;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "quermesse.ics";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      toast("Calendário baixado!");
+    });
+
+    render();
+  </script>
+</body>
+</html>
